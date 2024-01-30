@@ -18,7 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include "LiquidCrystal.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -215,7 +215,100 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+typedef unsigned char byte;
 
+ byte heart[8] = {
+   0x00, // 0b00000,
+   0x0A, // 0b01010,
+   0x1F, // 0b11111,
+   0x1F, // 0b11111,
+   0x1F, // 0b11111,
+   0x0E, // 0b01110,
+   0x04, // 0b00100,
+   0x00  // 0b00000
+ };
+ byte MisteryBox[8] = {
+   0x1F,
+   0x11,
+   0x15,
+   0x1D,
+   0x1B,
+   0x1B,
+   0x1F,
+   0x1B
+ };
+
+ byte wall[8] = {
+   0x1F,
+   0x1F,
+   0x1F,
+   0x1F,
+   0x1F,
+   0x1F,
+   0x1F,
+   0x1F
+ };
+ byte obstacle[8] = {
+     0x1F,
+       0x0E,
+       0x0E,
+       0x0E,
+       0x0E,
+       0x0E,
+       0x0E,
+       0x1F
+ };
+
+ byte leftFox[8] = {
+     0x00,
+       0x00,
+       0x06,
+       0x1A,
+       0x0F,
+       0x1A,
+       0x06,
+       0x00
+ };
+
+ byte rightFox[8] = {
+     0x00,
+       0x00,
+       0x0C,
+       0x0B,
+       0x1E,
+       0x0B,
+       0x0C,
+       0x00
+ };
+
+ byte topّFox[8] = {
+     0x00,
+       0x00,
+       0x00,
+       0x0A,
+       0x0E,
+       0x15,
+       0x1F,
+       0x04
+ };
+
+ byte bottomFox[8] = {
+     0x00,
+       0x04,
+       0x1F,
+       0x15,
+       0x0E,
+       0x0A,
+       0x00,
+       0x00
+ };
+
+ void showMain(void){
+     setCursor(1, 0);
+
+	 write(1);
+	      print("ROCKET QUEEN");
+ }
 /* USER CODE END 0 */
 
 /**
@@ -255,7 +348,14 @@ int main(void)
       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_SET);
       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
-  /* USER CODE END 2 */
+      HAL_UART_Transmit(&huart1, "yo",
+                                2,
+                                HAL_MAX_DELAY);
+
+      LiquidCrystal(GPIOD, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11, GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14);
+      createChar(1, bottomFox);
+      showMain();
+      /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -495,7 +595,9 @@ static void MX_GPIO_Init(void)
                           |LD6_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11
+                          |GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_0
+                          |GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : DRDY_Pin MEMS_INT3_Pin MEMS_INT4_Pin MEMS_INT1_Pin
                            MEMS_INT2_Pin */
@@ -528,8 +630,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PD0 PD1 PD2 PD3 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3;
+  /*Configure GPIO pins : PD8 PD9 PD10 PD11
+                           PD12 PD13 PD14 PD0
+                           PD1 PD2 PD3 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11
+                          |GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_0
+                          |GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
