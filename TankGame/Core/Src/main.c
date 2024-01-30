@@ -43,10 +43,163 @@ I2C_HandleTypeDef hi2c1;
 
 SPI_HandleTypeDef hspi1;
 
+UART_HandleTypeDef huart1;
+
 PCD_HandleTypeDef hpcd_USB_FS;
 
 /* USER CODE BEGIN PV */
+GPIO_TypeDef *const Row_ports[] = { GPIOB, GPIOB, GPIOB, GPIOB };
+const uint16_t Row_pins[] =
+    { GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15 };
+// RIGHT WIRES: Column1 PB12, Column2 PB13, Column3 PB14, Column4 PB15
+GPIO_TypeDef *const Column_ports[] = { GPIOD, GPIOD, GPIOD, GPIOD };
+const uint16_t Column_pins[] =
+    { GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3 };
+// LEFT WIRES : D0 , D1,D2,D3
+volatile uint32_t last_gpio_exti;
 
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+
+  if (last_gpio_exti + 200 > HAL_GetTick()) // Simple button debouncing
+  {
+    return;
+  }
+  last_gpio_exti = HAL_GetTick();
+
+  int8_t row_number = -1;
+  int8_t column_number = -1;
+
+  if (GPIO_Pin == GPIO_PIN_0)
+  {
+    // blue_button_pressed = 1;
+    // return;
+  }
+
+  for (uint8_t row = 0; row < 4; row++) // Loop through Rows
+  {
+    if (GPIO_Pin == Row_pins[row])
+    {
+      row_number = row;
+    }
+  }
+
+  HAL_GPIO_WritePin(Column_ports[0], Column_pins[0], 0);
+  HAL_GPIO_WritePin(Column_ports[1], Column_pins[1], 0);
+  HAL_GPIO_WritePin(Column_ports[2], Column_pins[2], 0);
+  HAL_GPIO_WritePin(Column_ports[3], Column_pins[3], 0);
+
+  for (uint8_t col = 0; col < 4; col++) // Loop through Columns
+  {
+    HAL_GPIO_WritePin(Column_ports[col], Column_pins[col], 1);
+    if (HAL_GPIO_ReadPin(Row_ports[row_number], Row_pins[row_number]))
+    {
+
+      column_number = col;
+    }
+    HAL_GPIO_WritePin(Column_ports[col], Column_pins[col], 0);
+  }
+
+  HAL_GPIO_WritePin(Column_ports[0], Column_pins[0], 1);
+  HAL_GPIO_WritePin(Column_ports[1], Column_pins[1], 1);
+  HAL_GPIO_WritePin(Column_ports[2], Column_pins[2], 1);
+  HAL_GPIO_WritePin(Column_ports[3], Column_pins[3], 1);
+
+  if (row_number == -1 || column_number == -1)
+  {
+    return; // Reject invalid scan
+  }
+  //   C0   C1   C2   C3
+  // +----+----+----+----+
+  // | 1  | 2  | 3  | 4  |  R0
+  // +----+----+----+----+
+  // | 5  | 6  | 7  | 8  |  R1
+  // +----+----+----+----+
+  // | 9  | 10 | 11 | 12 |  R2
+  // +----+----+----+----+
+  // | 13 | 14 | 15 | 16 |  R3
+  // +----+----+----+----+
+  const uint8_t button_number = row_number * 4 + column_number + 1;
+  switch (button_number)
+  {
+  case 1:
+    HAL_UART_Transmit(&huart1, "1",
+                        1,
+                        HAL_MAX_DELAY);
+    /* code */
+    break;
+  case 2:
+    HAL_UART_Transmit(&huart1, "2",
+                        1,
+                        HAL_MAX_DELAY);
+    /* code */
+    break;
+  case 3:
+    HAL_UART_Transmit(&huart1, "3",
+                        1,
+                        HAL_MAX_DELAY);
+    /* code */
+    break;
+  case 4:
+    HAL_UART_Transmit(&huart1, "4",
+                        1,
+                        HAL_MAX_DELAY);
+    /* code */
+    break;
+  case 5:
+    HAL_UART_Transmit(&huart1, "5",
+                        1,
+                        HAL_MAX_DELAY);
+    /* code */
+    break;
+  case 6:
+    HAL_UART_Transmit(&huart1, "6",
+                        1,
+                        HAL_MAX_DELAY);
+    /* code */
+    break;
+  case 7:
+    HAL_UART_Transmit(&huart1, "7",
+                        1,
+                        HAL_MAX_DELAY);
+    /* code */
+    break;
+  case 8:
+    HAL_UART_Transmit(&huart1, "8",
+                          1,
+                          HAL_MAX_DELAY);
+    /* code */
+    break;
+  case 9:
+
+    /* code */
+    break;
+  case 10:
+    /* code */
+    break;
+  case 11:
+    /* code */
+    break;
+  case 12:
+    /* code */
+    break;
+  case 13:
+    /* code */
+    break;
+  case 14:
+    /* code */
+    break;
+  case 15:
+    /* code */
+    break;
+  case 16:
+    /* code */
+    break;
+
+  default:
+    break;
+  }
+}
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -55,6 +208,7 @@ static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_USB_PCD_Init(void);
+static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -95,8 +249,12 @@ int main(void)
   MX_I2C1_Init();
   MX_SPI1_Init();
   MX_USB_PCD_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
+      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_SET);
+      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
+      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -149,7 +307,9 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB|RCC_PERIPHCLK_I2C1;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB|RCC_PERIPHCLK_USART1
+                              |RCC_PERIPHCLK_I2C1;
+  PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
   PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_HSI;
   PeriphClkInit.USBClockSelection = RCC_USBCLKSOURCE_PLL;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
@@ -247,6 +407,41 @@ static void MX_SPI1_Init(void)
 }
 
 /**
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART1_Init 0 */
+
+  /* USER CODE END USART1_Init 0 */
+
+  /* USER CODE BEGIN USART1_Init 1 */
+
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 9600;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART1_Init 2 */
+
+  /* USER CODE END USART1_Init 2 */
+
+}
+
+/**
   * @brief USB Initialization Function
   * @param None
   * @retval None
@@ -292,11 +487,15 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, CS_I2C_SPI_Pin|LD4_Pin|LD3_Pin|LD5_Pin
                           |LD7_Pin|LD9_Pin|LD10_Pin|LD8_Pin
                           |LD6_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : DRDY_Pin MEMS_INT3_Pin MEMS_INT4_Pin MEMS_INT1_Pin
                            MEMS_INT2_Pin */
@@ -322,6 +521,23 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PB12 PB13 PB14 PB15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PD0 PD1 PD2 PD3 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 1, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 }
 

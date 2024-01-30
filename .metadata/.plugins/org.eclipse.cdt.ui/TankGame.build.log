@@ -1,0 +1,10 @@
+15:22:42 **** Incremental Build of configuration Debug for project TankGame ****
+make -j8 all 
+arm-none-eabi-size   TankGame.elf 
+   text	   data	    bss	    dec	    hex	filename
+  16992	     20	   2644	  19656	   4cc8	TankGame.elf
+Finished building: default.size.stdout
+ 
+
+15:22:43 Build Finished. 0 errors, 0 warnings. (took 243ms)
+
