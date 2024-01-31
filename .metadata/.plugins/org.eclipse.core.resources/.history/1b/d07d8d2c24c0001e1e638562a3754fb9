@@ -123,19 +123,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	// +----+----+----+----+
 	// | 13 | 14 | 15 | 16 |  R3
 	// +----+----+----+----+
-	//1 - 6 - 9 for the Right Player
-	//4 -7 -12 for the left player
 	const uint8_t button_number = row_number * 4 + column_number + 1;
 	switch (button_number) {
 	case 1:
-		//TO DECREASE IN SETTING
-		if (screen == 4) {
-		    R_Health = (R_Health + 10 - 1) % 10;
-		    HealthSetting();
-		} else if (screen == 5) {
-		    R_bullets = (R_bullets + 10 - 1) % 10;
-		    bulletsSetting();
-		}
+		HAL_UART_Transmit(&huart1, "1", 1,
+		HAL_MAX_DELAY);
+
 		/* code */
 		break;
 	case 2:
@@ -167,16 +160,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	case 4:
 		HAL_UART_Transmit(&huart1, "4", 1,
 		HAL_MAX_DELAY);
-
-		//TO DECREASE IN SETTING
-		if (screen == 4) {
-		    L_Health = (L_Health + 10 - 1) % 10;
-		    HealthSetting();
-		} else if (screen == 5) {
-		    L_bullets = (L_bullets + 10 - 1) % 10;
-		    bulletsSetting();
-		}
-
+		/* code */
 		break;
 	case 5:
 		HAL_UART_Transmit(&huart1, "5", 1,
@@ -196,10 +180,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	case 8:
 		//back btn
 		refreshAll();
-		if (screen == 4 | screen == 5) {
-			screen = 3;
+		if(screen==4 | screen==5){
+			screen=3;
 			showSetting();
-		} else {
+		}
+		else {
 			screen = 0;
 			showMain();
 		}
@@ -210,13 +195,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		break;
 	case 9:
 
-		if (screen == 4) {
-			R_Health = (R_Health + 1) % 10;
-			HealthSetting();
-		} else if (screen == 5) {
-			R_bullets = (R_bullets + 1) % 10;
-			bulletsSetting();
-		}
+		/* code */
 		break;
 	case 10:
 		/* code */
@@ -225,41 +204,27 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		/* code */
 		break;
 	case 12:
-		if (screen == 4) {
-			L_Health = (L_Health + 1) % 10;
-			HealthSetting();
-		} else if (screen == 5) {
-			L_bullets = (L_bullets + 1) % 10;
-			bulletsSetting();
-		}
 		/* code */
 		break;
 	case 13:
 		/* code */
 		if (screen = 3) {
 			setCursor(20, 1);
-			print("                   ");
+			print("                 ");
 			HealthSetting();
 			screen = 4;
 		}
 		break;
 	case 14:
 		/* code */
-		if (screen == 3) {
-			screen = 5;
+		if (screen = 3) {
 			setCursor(20, 1);
-			print("                   ");
+			print("                 ");
 			bulletsSetting();
+			screen = 5;
 		}
 		break;
 	case 15:
-		if (screen == 3) {
-			vfx = (vfx + 1) % 2;
-		}
-		if (screen == 4 | screen == 5) {
-			screen = 3;
-			showSetting();
-		}
 		/* code */
 		break;
 	case 16:
@@ -349,14 +314,10 @@ void bulletsSetting(void) {
 	setCursor(0, 1);
 	char RBStr[20];
 	sprintf(RBStr, "Right Bullets:%d", R_bullets);
-	print(RBStr);
 	setCursor(20, 0);
-
 	char LBStr[20];
 	sprintf(LBStr, "Left Bullets:%d", L_bullets);
-	print(LBStr);
 	setCursor(20, 1);
-
 	print("#-Confirm");
 }
 
@@ -364,14 +325,10 @@ void HealthSetting(void) {
 	setCursor(0, 1);
 	char RBStr[20];
 	sprintf(RBStr, "Right Health:%d", R_Health);
-	print(RBStr);
 	setCursor(20, 0);
-
 	char LBStr[20];
 	sprintf(LBStr, "Left Health:%d", L_Health);
-	print(LBStr);
 	setCursor(20, 1);
-
 	print("#-Confirm");
 }
 

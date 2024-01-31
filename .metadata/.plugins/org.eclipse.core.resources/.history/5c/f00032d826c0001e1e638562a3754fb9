@@ -130,10 +130,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	case 1:
 		//TO DECREASE IN SETTING
 		if (screen == 4) {
-		    R_Health = (R_Health + 10 - 1) % 10;
+		    R_Health = (R_Health + 9 - 1) % 9;
 		    HealthSetting();
 		} else if (screen == 5) {
-		    R_bullets = (R_bullets + 10 - 1) % 10;
+		    R_bullets = (R_bullets + 9 - 1) % 9;
 		    bulletsSetting();
 		}
 		/* code */
@@ -170,10 +170,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 		//TO DECREASE IN SETTING
 		if (screen == 4) {
-		    L_Health = (L_Health + 10 - 1) % 10;
+		    R_Health = (R_Health + 9 - 1) % 9;
 		    HealthSetting();
 		} else if (screen == 5) {
-		    L_bullets = (L_bullets + 10 - 1) % 10;
+		    R_bullets = (R_bullets + 9 - 1) % 9;
 		    bulletsSetting();
 		}
 
@@ -211,10 +211,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	case 9:
 
 		if (screen == 4) {
-			R_Health = (R_Health + 1) % 10;
+			R_Health = (R_Health + 1) % 9;
 			HealthSetting();
 		} else if (screen == 5) {
-			R_bullets = (R_bullets + 1) % 10;
+			R_bullets = (R_bullets + 1) % 9;
 			bulletsSetting();
 		}
 		break;
@@ -226,10 +226,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		break;
 	case 12:
 		if (screen == 4) {
-			L_Health = (L_Health + 1) % 10;
+			L_Health = (L_Health + 1) % 9;
 			HealthSetting();
 		} else if (screen == 5) {
-			L_bullets = (L_bullets + 1) % 10;
+			L_bullets = (L_bullets + 1) % 9;
 			bulletsSetting();
 		}
 		/* code */
@@ -238,7 +238,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		/* code */
 		if (screen = 3) {
 			setCursor(20, 1);
-			print("                   ");
+			print("                 ");
 			HealthSetting();
 			screen = 4;
 		}
@@ -248,7 +248,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		if (screen == 3) {
 			screen = 5;
 			setCursor(20, 1);
-			print("                   ");
+			print("                 ");
 			bulletsSetting();
 		}
 		break;
