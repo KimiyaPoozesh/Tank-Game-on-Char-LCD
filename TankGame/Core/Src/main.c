@@ -18,7 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "LiquidCrystal.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -41,6 +41,8 @@
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
 
+RTC_HandleTypeDef hrtc;
+
 SPI_HandleTypeDef hspi1;
 
 UART_HandleTypeDef huart1;
@@ -48,6 +50,8 @@ UART_HandleTypeDef huart1;
 PCD_HandleTypeDef hpcd_USB_FS;
 
 /* USER CODE BEGIN PV */
+int screen=0;
+
 GPIO_TypeDef *const Row_ports[] = { GPIOB, GPIOB, GPIOB, GPIOB };
 const uint16_t Row_pins[] =
     { GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15 };
@@ -126,12 +130,21 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     HAL_UART_Transmit(&huart1, "1",
                         1,
                         HAL_MAX_DELAY);
+
+
     /* code */
     break;
   case 2:
     HAL_UART_Transmit(&huart1, "2",
                         1,
                         HAL_MAX_DELAY);
+    if(screen==0){
+        	screen=1;
+        	setCursor(20, 0);
+        	print("                    ");
+        	setCursor(0, 1);
+        	print("                      ");
+        	showAbout();}
     /* code */
     break;
   case 3:
@@ -165,6 +178,15 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     /* code */
     break;
   case 8:
+	  //back btn
+	  setCursor(0, 0);
+	  print("              ");
+	  setCursor(20, 0);
+	  print("            ");
+	  setCursor(20, 1);
+	  print("          ");
+	  showMain();
+	  screen=0;
     HAL_UART_Transmit(&huart1, "8",
                           1,
                           HAL_MAX_DELAY);
@@ -209,6 +231,7 @@ static void MX_I2C1_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_USB_PCD_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_RTC_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -304,10 +327,18 @@ typedef unsigned char byte;
  };
 
  void showMain(void){
-     setCursor(1, 0);
+     setCursor(0, 0);
+	 print("1- Play");
+     setCursor(0, 1);
+     print("2- About");
+     write(1);
+     setCursor(20, 0);
+     print("3- Setting");
+ }
 
-	 write(1);
-	      print("ROCKET QUEEN");
+ void showAbout(void){
+	 setCursor(0, 0);
+	 print("Kimiya & Atiye");
  }
 /* USER CODE END 0 */
 
@@ -343,6 +374,7 @@ int main(void)
   MX_SPI1_Init();
   MX_USB_PCD_Init();
   MX_USART1_UART_Init();
+  MX_RTC_Init();
   /* USER CODE BEGIN 2 */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_SET);
@@ -353,9 +385,19 @@ int main(void)
                                 HAL_MAX_DELAY);
 
       LiquidCrystal(GPIOD, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11, GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14);
+      RTC_TimeTypeDef mytime;
+
+      RTC_DateTypeDef mydate;
+      mydate.Year=19;
+      mydate.Month=6;
+      mydate.Date=5;
+
+      HAL_RTC_SetDate(&hrtc, &mydate, RTC_FORMAT_BIN);
+      char timeStr[20];
+      char dateStr[20];
       createChar(1, bottomFox);
       showMain();
-      /* USER CODE END 2 */
+  /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -364,6 +406,21 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  if(screen==1){
+	  HAL_RTC_GetTime(&hrtc, &mytime, RTC_FORMAT_BIN);
+	  HAL_RTC_GetDate(&hrtc, &mydate, RTC_FORMAT_BIN);
+	  setCursor(20,0);
+	  sprintf(timeStr,"%2d:%2d:%2d",mytime.Hours,mytime.Minutes, mytime.Seconds);
+
+	  print(timeStr);
+	  setCursor(20,1);
+	  sprintf(dateStr,"%2d//%2d//%2d",mydate.Year,mydate.Month, mydate.Date);
+
+	  print(dateStr);
+
+	  }
+
+
   }
   /* USER CODE END 3 */
 }
@@ -381,11 +438,13 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_LSI
+                              |RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL6;
@@ -408,9 +467,10 @@ void SystemClock_Config(void)
     Error_Handler();
   }
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB|RCC_PERIPHCLK_USART1
-                              |RCC_PERIPHCLK_I2C1;
+                              |RCC_PERIPHCLK_I2C1|RCC_PERIPHCLK_RTC;
   PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
   PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_HSI;
+  PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
   PeriphClkInit.USBClockSelection = RCC_USBCLKSOURCE_PLL;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
@@ -463,6 +523,69 @@ static void MX_I2C1_Init(void)
   /* USER CODE BEGIN I2C1_Init 2 */
 
   /* USER CODE END I2C1_Init 2 */
+
+}
+
+/**
+  * @brief RTC Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_RTC_Init(void)
+{
+
+  /* USER CODE BEGIN RTC_Init 0 */
+
+  /* USER CODE END RTC_Init 0 */
+
+  RTC_TimeTypeDef sTime = {0};
+  RTC_DateTypeDef sDate = {0};
+
+  /* USER CODE BEGIN RTC_Init 1 */
+
+  /* USER CODE END RTC_Init 1 */
+
+  /** Initialize RTC Only
+  */
+  hrtc.Instance = RTC;
+  hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
+  hrtc.Init.AsynchPrediv = 39;
+  hrtc.Init.SynchPrediv = 999;
+  hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
+  hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+  hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+  if (HAL_RTC_Init(&hrtc) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /* USER CODE BEGIN Check_RTC_BKUP */
+
+  /* USER CODE END Check_RTC_BKUP */
+
+  /** Initialize RTC and set the Time and Date
+  */
+  sTime.Hours = 0x0;
+  sTime.Minutes = 0x0;
+  sTime.Seconds = 0x0;
+  sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+  sTime.StoreOperation = RTC_STOREOPERATION_RESET;
+  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sDate.WeekDay = RTC_WEEKDAY_MONDAY;
+  sDate.Month = RTC_MONTH_JANUARY;
+  sDate.Date = 0x1;
+  sDate.Year = 0x0;
+
+  if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN RTC_Init 2 */
+
+  /* USER CODE END RTC_Init 2 */
 
 }
 
