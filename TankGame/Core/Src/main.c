@@ -18,7 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include <stdlib.h>
+#include <time.h>
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -31,6 +32,12 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define NUM_HEARTS 3
+#define NUM_BOXES 2
+#define NUM_BULLETS 5
+#define NUM_OBSTACLE 6
+#define LCD_WIDTH 38
+#define LCD_HEIGHT 2
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -56,6 +63,31 @@ int L_Health = 0;
 int R_bullets = 0;
 int L_bullets = 0;
 int vfx = 1; //1 if on 0 if off
+typedef struct {
+	int x;
+	int y;
+	char c;
+} misteryBoxOBJ;
+typedef struct {
+	int x;
+	int y;
+	char c;
+} heartOBJ;
+typedef struct{
+	int x;
+	int y;
+	char c;
+}bulletOBJ;
+typedef struct{
+	int x;
+	int y;
+	char c;
+}obstacleOBJ;
+heartOBJ hearts[NUM_HEARTS];
+misteryBoxOBJ boxes[NUM_BOXES];
+bulletOBJ bullets[NUM_BULLETS];
+obstacleOBJ obstacles[NUM_OBSTACLE];
+char lcd[LCD_HEIGHT][LCD_WIDTH];
 
 GPIO_TypeDef *const Row_ports[] = { GPIOB, GPIOB, GPIOB, GPIOB };
 const uint16_t Row_pins[] =
@@ -130,19 +162,26 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	case 1:
 		//TO DECREASE IN SETTING
 		if (screen == 4) {
-		    R_Health = (R_Health + 10 - 1) % 10;
-		    HealthSetting();
+			R_Health = (R_Health + 10 - 1) % 10;
+			HealthSetting();
 		} else if (screen == 5) {
-		    R_bullets = (R_bullets + 10 - 1) % 10;
-		    bulletsSetting();
+			R_bullets = (R_bullets + 10 - 1) % 10;
+			bulletsSetting();
 		}
+		if (screen == 0) {
+			screen = 1;
+			refreshAll();
+			initializeObjects();
+			displayObjects();
+		}
+
 		/* code */
 		break;
 	case 2:
 		HAL_UART_Transmit(&huart1, "2", 1,
 		HAL_MAX_DELAY);
 		if (screen == 0) {
-			screen = 1;
+			screen = 2;
 			setCursor(20, 0);
 			print("                    ");
 			setCursor(0, 1);
@@ -170,11 +209,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 		//TO DECREASE IN SETTING
 		if (screen == 4) {
-		    L_Health = (L_Health + 10 - 1) % 10;
-		    HealthSetting();
+			L_Health = (L_Health + 10 - 1) % 10;
+			HealthSetting();
 		} else if (screen == 5) {
-		    L_bullets = (L_bullets + 10 - 1) % 10;
-		    bulletsSetting();
+			L_bullets = (L_bullets + 10 - 1) % 10;
+			bulletsSetting();
 		}
 
 		break;
@@ -186,11 +225,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	case 6:
 		HAL_UART_Transmit(&huart1, "6", 1,
 		HAL_MAX_DELAY);
-		/* code */
+		changeFoxStateR(0);
 		break;
 	case 7:
 		HAL_UART_Transmit(&huart1, "7", 1,
 		HAL_MAX_DELAY);
+		changeFoxStateR(1);
 		/* code */
 		break;
 	case 8:
@@ -298,29 +338,106 @@ static void MX_RTC_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 typedef unsigned char byte;
-
-byte heart[8] = { 0x00, // 0b00000,
-		0x0A, // 0b01010,
-		0x1F, // 0b11111,
-		0x1F, // 0b11111,
-		0x1F, // 0b11111,
-		0x0E, // 0b01110,
-		0x04, // 0b00100,
-		0x00  // 0b00000
-		};
+byte bullet[8] = { 0x08, 0x1C, 0x0B, 0x07, 0x0E, 0x1C, 0x08, 0x00 };
+byte heart[8] = { 0x00, 0x0A, 0x1F, 0x1F, 0x1F, 0x0E, 0x04, 0x00 };
 byte MisteryBox[8] = { 0x1F, 0x11, 0x15, 0x1D, 0x1B, 0x1B, 0x1F, 0x1B };
-
 byte wall[8] = { 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F };
 byte obstacle[8] = { 0x1F, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x1F };
-
 byte leftFox[8] = { 0x00, 0x00, 0x06, 0x1A, 0x0F, 0x1A, 0x06, 0x00 };
-
 byte rightFox[8] = { 0x00, 0x00, 0x0C, 0x0B, 0x1E, 0x0B, 0x0C, 0x00 };
-
-byte topّFox[8] = { 0x00, 0x00, 0x00, 0x0A, 0x0E, 0x15, 0x1F, 0x04 };
-
+byte topFox[8] = { 0x00, 0x00, 0x00, 0x0A, 0x0E, 0x15, 0x1F, 0x04 };
 byte bottomFox[8] = { 0x00, 0x04, 0x1F, 0x15, 0x0E, 0x0A, 0x00, 0x00 };
 
+byte* foxStates[4] = { leftFox, rightFox, topFox, bottomFox };
+int currentStateR = 0;
+int currentStateL = 0;
+
+
+void changeFoxStateR(int Player) {
+    byte* currentFoxR = foxStates[currentStateR];
+    byte* currentFoxL = foxStates[currentStateL];
+
+    if (!Player) {
+    		createChar(7, currentFoxR);
+    		currentStateR = (currentStateR + 1) % 4;
+    	} else {
+    		createChar(8, currentFoxL);
+    		currentStateL = (currentStateL + 1) % 4;
+    	}
+}
+
+
+
+
+void initializeObjects() {
+
+	for (int i = 0; i < LCD_HEIGHT; i++) {
+		for (int j = 0; j < LCD_WIDTH; j++) {
+			lcd[i][j] = ' ';  // Empty cell
+		}
+	}
+
+	//hearts
+	for (int i = 0; i < NUM_HEARTS; i++) {
+		hearts[i].x = 3 + rand() % 28;  // Random number between 3 and 30
+		hearts[i].y = rand() % 2;       // Random number between 0 and 1
+		hearts[i].c = 1;
+	}
+
+	//  mistery boxes
+	for (int i = 0; i < NUM_BOXES; i++) {
+		boxes[i].x = 3 + rand() % 28;  // Random number between 3 and 30
+		boxes[i].y = rand() % 2;       // Random number between 0 and 1
+		boxes[i].c = 2;
+	}
+
+	//bullets
+	for (int i = 0; i < NUM_BULLETS; i++) {
+			bullets[i].x = 3 + rand() % 28;  // Random number between 3 and 30
+			bullets[i].y = rand() % 2;       // Random number between 0 and 1
+			bullets[i].c = 5;
+		}
+	//obstacles
+	for (int i = 0; i < NUM_OBSTACLE; i++) {
+				obstacles[i].x = 3 + rand() % 28;  // Random number between 3 and 30
+				obstacles[i].y = rand() % 2;       // Random number between 0 and 1
+				obstacles[i].c = 4;
+			}
+	for (int i = 0; i < NUM_HEARTS; i++) {
+		lcd[hearts[i].y][hearts[i].x] = hearts[i].c;
+	}
+	for (int i = 0; i < NUM_BULLETS; i++) {
+		lcd[bullets[i].y][bullets[i].x] = bullets[i].c;
+	}
+	for (int i = 0; i < NUM_BOXES; i++) {
+			lcd[boxes[i].y][boxes[i].x] = boxes[i].c;
+		}
+	for (int i = 0; i < NUM_OBSTACLE; i++) {
+				lcd[obstacles[i].y][obstacles[i].x] = obstacles[i].c;
+			}
+	//WALLS
+	lcd[1][1]=3;
+	lcd[0][22]=3;
+	lcd[1][18]=3;
+	lcd[0][37]=3;
+
+	//[0][38] [0][39] [1][38] [1][39]  are dead
+	//Wolves
+	lcd[1][0]=8;
+	lcd[1][19]=7;
+}
+
+void displayObjects() {
+	// Display the objects based on the screen array
+	for (int i = 0; i < LCD_HEIGHT; i++) {
+		for (int j = 0; j < LCD_WIDTH; j++) {
+			setCursor(j, i);
+			write(lcd[i][j]);
+		}
+	}
+}
+
+//MENU PART
 void showMain(void) {
 	setCursor(0, 0);
 	print("1- Play");
@@ -416,11 +533,19 @@ int main(void) {
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
 	HAL_UART_Transmit(&huart1, "yo", 2,
 	HAL_MAX_DELAY);
+	srand(time(NULL));  // Initialize the random number generator
 
 	LiquidCrystal(GPIOD, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11,
 	GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14);
-	RTC_TimeTypeDef mytime;
 
+	byte* foxStates[4] = { leftFox, rightFox, topFox, bottomFox };
+
+	createChar(2, MisteryBox);
+	createChar(3, wall);
+	createChar(4, obstacle);
+	createChar(1, heart);
+	createChar(5,bullet);
+	RTC_TimeTypeDef mytime;
 	RTC_DateTypeDef mydate;
 	mydate.Year = 19;
 	mydate.Month = 6;
@@ -429,7 +554,6 @@ int main(void) {
 	HAL_RTC_SetDate(&hrtc, &mydate, RTC_FORMAT_BIN);
 	char timeStr[20];
 	char dateStr[20];
-	createChar(1, bottomFox);
 	showMain();
 	/* USER CODE END 2 */
 
@@ -439,7 +563,7 @@ int main(void) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
-		if (screen == 1) {
+		if (screen == 2) {
 			HAL_RTC_GetTime(&hrtc, &mytime, RTC_FORMAT_BIN);
 			HAL_RTC_GetDate(&hrtc, &mydate, RTC_FORMAT_BIN);
 			setCursor(20, 0);
