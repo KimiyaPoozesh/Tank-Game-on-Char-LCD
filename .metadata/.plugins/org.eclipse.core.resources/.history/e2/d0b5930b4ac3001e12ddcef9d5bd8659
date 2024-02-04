@@ -421,7 +421,7 @@ void movement(Player *player, int currentState) {
 				}
 				break;
 
-	case 2://left
+	case 2:
 		if (player->y > 0 && player->y <= 19) {
 					if (lcd[player->x][(player->y)-1]!=3 && lcd[player->x][(player->y)-1]!=4) {
 						player->y = (player->y) - 1;
