@@ -18,8 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include <stdlib.h>
-#include <time.h>
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -52,16 +51,26 @@ RTC_HandleTypeDef hrtc;
 
 SPI_HandleTypeDef hspi1;
 
+TIM_HandleTypeDef htim1;
+
 UART_HandleTypeDef huart1;
 
 PCD_HandleTypeDef hpcd_USB_FS;
 
 /* USER CODE BEGIN PV */
+typedef enum {
+	UP, DOWN, LEFT, RIGHT
+} Direction;
+
 int screen = 0; //0=main 1=play 2=about 3=setting 4=health 5=bullets
 int R_Health = 0;
 int L_Health = 0;
 int R_bullets = 0;
 int L_bullets = 0;
+int dir = 0;
+int shotedR = 0;
+int shotedL = 0;
+int shootFlag = 0;
 int vfx = 1; //1 if on 0 if off
 typedef unsigned char byte;
 byte bullet[8] = { 0x08, 0x1C, 0x0B, 0x07, 0x0E, 0x1C, 0x08, 0x00 };
@@ -73,6 +82,7 @@ byte leftFox[8] = { 0x00, 0x00, 0x06, 0x1A, 0x0F, 0x1A, 0x06, 0x00 };
 byte rightFox[8] = { 0x00, 0x00, 0x0C, 0x0B, 0x1E, 0x0B, 0x0C, 0x00 };
 byte topFox[8] = { 0x00, 0x00, 0x00, 0x0A, 0x0E, 0x15, 0x1F, 0x04 };
 byte bottomFox[8] = { 0x00, 0x04, 0x1F, 0x15, 0x0E, 0x0A, 0x00, 0x00 };
+byte Shot[8] = { 0x00, 0x00, 0x00, 0x04, 0x0E, 0x04, 0x00, 0x00 };
 
 typedef struct {
 	int x;
@@ -97,8 +107,17 @@ typedef struct {
 typedef struct {
 	int x;
 	int y;
+	Direction direction;
 	char c;
 } Player;
+typedef struct {
+	int col;
+	int row;
+	Direction direction;
+	int isAlive;
+} fire;
+int num_shooted_bullet = 0;
+fire fires[100];
 
 Player playerR;
 Player playerL;
@@ -196,12 +215,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 			initializeObjects();
 			displayObjects();
 		}
+		if (screen == 1) {
+			shoot(&playerR);
+		}
 
 		/* code */
 		break;
 	case 2:
-		HAL_UART_Transmit(&huart1, "2", 1,
-		HAL_MAX_DELAY);
+
 		if (screen == 0) {
 			screen = 2;
 			setCursor(20, 0);
@@ -226,8 +247,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		/* code */
 		break;
 	case 4:
-		HAL_UART_Transmit(&huart1, "4", 1,
-		HAL_MAX_DELAY);
+		if (screen == 1) {
+			shoot(&playerL);
+			//shot(playerR.x, playerR.y + 1, currentStateR % 2);
+		}
 
 		//TO DECREASE IN SETTING
 		if (screen == 4) {
@@ -360,6 +383,7 @@ static void MX_SPI1_Init(void);
 static void MX_USB_PCD_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_RTC_Init(void);
+static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -378,6 +402,42 @@ void changeFoxStateR(int Player) {
 		createChar(8, currentFoxL);
 		currentStateL = (currentStateL + 1) % 4;
 	}
+	switch (currentStateR) {
+	case 0:
+		playerR.direction = UP;
+		break;
+	case 1:
+		playerR.direction = RIGHT;
+		break;
+	case 2:
+		playerR.direction = LEFT;
+		break;
+	case 3:
+		playerR.direction = DOWN;
+		break;
+	default:
+		break;
+	}
+	switch (currentStateL) {
+	case 0:
+		playerL.direction = UP;
+		break;
+	case 1:
+		playerL.direction = RIGHT;
+		break;
+	case 2:
+		playerL.direction = LEFT;
+		break;
+	case 3:
+		playerL.direction = DOWN;
+		break;
+	default:
+		break;
+	}
+	char buffer[50];
+	sprintf(buffer, "The current state of the fox (currentStateL) is: %d\n",
+			currentStateL);
+	HAL_UART_Transmit(&huart1, (uint8_t*) buffer, strlen(buffer), 1000);
 }
 void increase(int isHealth, Player *player) {
 	if (isHealth) {
@@ -410,6 +470,131 @@ void increase(int isHealth, Player *player) {
 		}
 	}
 }
+
+void shoot(Player *player) {
+//  if (hasBullet(player) == 0) {
+//    return;
+//  }
+//  decreaseBullet(player);
+
+	num_shooted_bullet++;
+
+	for (int i = 0; i < num_shooted_bullet; i++) {
+		if (!fires[i].isAlive) {
+			fires[i].col = player->y;
+			fires[i].row = player->x;
+			fires[i].direction = player->direction;
+			fires[i].isAlive = 1;
+			shootFlag = 1;
+			break;
+		}
+	}
+}
+
+void shotPosition() {
+	for (int k = 0; k < num_shooted_bullet; k++) {
+		if (fires[k].isAlive) {
+
+			int col = fires[k].col;
+			int row = fires[k].row;
+
+			switch (fires[k].direction) {
+			case RIGHT:
+				fires[k].col++;
+				break;
+			case DOWN:
+				if (row == 0) {
+					fires[k].row = 1;
+				} else if (row == 1 & col < 20) {
+					fires[k].row = 0;
+					fires[k].col += 20;
+				}
+				break;
+			case LEFT:
+				fires[k].col--;
+				break;
+			case UP:
+				if (row == 1) {
+					fires[k].row = 0;
+				} else if (row == 0 & col >= 20) {
+					fires[k].row = 1;
+					fires[k].col -= 20;
+				}
+				break;
+			default:
+				break;
+			}
+
+			int f = lcd[fires[k].col][fires[k].row];
+
+			if (f == 1 || f == 2 || f == 5) { // if health / bulletIcon / chance jump them
+				do {
+					switch (fires[k].direction) {
+					case RIGHT:
+						fires[k].col++;
+						break;
+					case DOWN:
+						if (row == 0) {
+							fires[k].row = 1;
+						} else if (row == 1 & col < 20) {
+							fires[k].row = 0;
+							fires[k].col += 20;
+						}
+						break;
+					case LEFT:
+						fires[k].col--;
+						break;
+					case UP:
+						if (row == 1) {
+							fires[k].row = 0;
+						} else if (row == 0 & col >= 20) {
+							fires[k].row = 1;
+							fires[k].col -= 20;
+						}
+						break;
+					default:
+						break;
+					}
+
+					f = lcd[fires[k].col][fires[k].row];
+				} while (f == 5 || f == 1 || f == 2);
+			} else if (f == 4) { //if wall
+				fires[k].isAlive = 0;
+			} else if (f == 3) { //if barrier
+				lcd[fires[k].row][fires[k].col] = ' ';
+				HAL_UART_Transmit(&huart1, lcd[fires[k].row][fires[k].col], 1, 100000);
+				fires[k].isAlive = 0;
+			} else if (fires[k].col == playerR.y && fires[k].row == playerR.x) {
+				//decreaseHealth(&player[0]);
+				fires[k].isAlive = 0;
+			} else if (fires[k].col == playerL.y && fires[k].row == playerL.x) {
+				//decreaseHealth(&playerL]);
+				fires[k].isAlive = 0;
+			} else if (fires[k].col < 0 || fires[k].col >= 40
+					|| fires[k].row < 0 || fires[k].row >= 2) {
+				fires[k].isAlive = 0;
+			}
+
+			if (!(col == playerR.y && row == playerR.x)
+					&& !(col == playerL.y && row == playerR.x)) {
+				setCursor(col, row);
+				print(" ");
+				HAL_Delay(500);
+			}
+
+			if (fires[k].isAlive) {
+				setCursor(fires[k].col, fires[k].row);
+				write(6);
+			} else {
+				num_shooted_bullet--;
+				shootFlag = 0;
+				fires[k].col = -1;
+				fires[k].row = -1;
+			}
+		}
+
+	}
+}
 void movement(Player *player, int currentState) {
 //	char buffer[50]; // Buffer to hold the string
 //
@@ -421,6 +606,7 @@ void movement(Player *player, int currentState) {
 	int oldY = player->y;
 	switch (currentState) {
 	case 0:	//top
+
 		if (player->x == 1 && lcd[0][player->y] != 4
 				&& lcd[0][player->y] != 3) {
 			//catching heart and bullet
@@ -448,6 +634,7 @@ void movement(Player *player, int currentState) {
 		}
 		break;
 	case 1:	//right
+
 		if (player->y >= 0 && player->y < 19) {
 			if (lcd[player->x][(player->y) + 1] != 3
 					&& lcd[player->x][(player->y) + 1] != 4) {
@@ -477,6 +664,7 @@ void movement(Player *player, int currentState) {
 		break;
 
 	case 2:	//left
+
 		if (player->y > 0 && player->y <= 19) {
 			if (lcd[player->x][(player->y) - 1] != 3
 					&& lcd[player->x][(player->y) - 1] != 4) {
@@ -522,9 +710,9 @@ void movement(Player *player, int currentState) {
 		} else if (player->x == 1 && player->y < 20) {
 			if (lcd[0][(player->y) + 20] != 4) {
 				//catching heart and bullet
-				if (lcd[0][(player->y) + 20]==1) {
+				if (lcd[0][(player->y) + 20] == 1) {
 					increase(1, player);
-				} else if (lcd[0][(player->y) + 20]==5) {
+				} else if (lcd[0][(player->y) + 20] == 5) {
 					increase(0, player);
 				}
 				player->x = 0;
@@ -606,7 +794,6 @@ void initializeObjects() {
 	lcd[1][18] = 3;
 	lcd[0][37] = 3;
 
-
 	//[0][38] [0][39] [1][38] [1][39]  are dead
 	//Wolves
 	lcd[playerR.x][playerR.y] = playerR.c;
@@ -680,6 +867,27 @@ void HealthSetting(void) {
 	print("#-Confirm");
 }
 
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+//	if (htim->Instance == TIM1) {
+//		if (shotedR) {
+//			HAL_UART_Transmit(&huart1, "TIMER", 5,
+//					HAL_MAX_DELAY);
+//			if (!shot(playerR.x, playerR.y + 1, currentStateR % 2)) {
+//				shotedR = 0;
+//			} else {
+//				shot(playerR.x, playerR.y + 1, currentStateR % 2);
+//			}
+//		}
+//		if (shotedL) {
+//			if (!shot(playerL.x, playerL.y + 1, currentStateR % 2)) {
+//				shotedL = 0;
+//			} else {
+//				shot(playerL.x, playerL.y + 1, currentStateR % 2);
+//			}
+//		}
+//	}
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -714,6 +922,7 @@ int main(void) {
 	MX_USB_PCD_Init();
 	MX_USART1_UART_Init();
 	MX_RTC_Init();
+	MX_TIM1_Init();
 	/* USER CODE BEGIN 2 */
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_SET);
@@ -733,11 +942,12 @@ int main(void) {
 	createChar(4, obstacle);
 	createChar(1, heart);
 	createChar(5, bullet);
+	createChar(6, Shot);
 	RTC_TimeTypeDef mytime;
 	RTC_DateTypeDef mydate;
-	mydate.Year = 19;
-	mydate.Month = 6;
-	mydate.Date = 5;
+	mydate.Year = 02;
+	mydate.Month = 11;
+	mydate.Date = 17;
 
 	HAL_RTC_SetDate(&hrtc, &mydate, RTC_FORMAT_BIN);
 	char timeStr[20];
@@ -748,6 +958,9 @@ int main(void) {
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
+		if (shootFlag == 1) {
+			shotPosition();
+		}
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
@@ -819,11 +1032,13 @@ void SystemClock_Config(void) {
 		Error_Handler();
 	}
 	PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB
-			| RCC_PERIPHCLK_USART1 | RCC_PERIPHCLK_I2C1 | RCC_PERIPHCLK_RTC;
+			| RCC_PERIPHCLK_USART1 | RCC_PERIPHCLK_I2C1 | RCC_PERIPHCLK_RTC
+			| RCC_PERIPHCLK_TIM1;
 	PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
 	PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_HSI;
 	PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
 	PeriphClkInit.USBClockSelection = RCC_USBCLKSOURCE_PLL;
+	PeriphClkInit.Tim1ClockSelection = RCC_TIM1CLK_HCLK;
 	if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK) {
 		Error_Handler();
 	}
@@ -968,6 +1183,50 @@ static void MX_SPI1_Init(void) {
 	/* USER CODE BEGIN SPI1_Init 2 */
 
 	/* USER CODE END SPI1_Init 2 */
+
+}
+
+/**
+ * @brief TIM1 Initialization Function
+ * @param None
+ * @retval None
+ */
+static void MX_TIM1_Init(void) {
+
+	/* USER CODE BEGIN TIM1_Init 0 */
+
+	/* USER CODE END TIM1_Init 0 */
+
+	TIM_ClockConfigTypeDef sClockSourceConfig = { 0 };
+	TIM_MasterConfigTypeDef sMasterConfig = { 0 };
+
+	/* USER CODE BEGIN TIM1_Init 1 */
+
+	/* USER CODE END TIM1_Init 1 */
+	htim1.Instance = TIM1;
+	htim1.Init.Prescaler = 47;
+	htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim1.Init.Period = 9999;
+	htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	htim1.Init.RepetitionCounter = 0;
+	htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+	if (HAL_TIM_Base_Init(&htim1) != HAL_OK) {
+		Error_Handler();
+	}
+	sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+	if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK) {
+		Error_Handler();
+	}
+	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+	sMasterConfig.MasterOutputTrigger2 = TIM_TRGO2_RESET;
+	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+	if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig)
+			!= HAL_OK) {
+		Error_Handler();
+	}
+	/* USER CODE BEGIN TIM1_Init 2 */
+
+	/* USER CODE END TIM1_Init 2 */
 
 }
 
