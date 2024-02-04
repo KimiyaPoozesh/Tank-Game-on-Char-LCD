@@ -522,9 +522,9 @@ void movement(Player *player, int currentState) {
 		} else if (player->x == 1 && player->y < 20) {
 			if (lcd[0][(player->y) + 20] != 4) {
 				//catching heart and bullet
-				if (lcd[0][(player->y) + 20]==1) {
+				if (lcd[0][(player->y) + 20]) {
 					increase(1, player);
-				} else if (lcd[0][(player->y) + 20]==5) {
+				} else if (lcd[0][(player->y) + 20]) {
 					increase(0, player);
 				}
 				player->x = 0;
@@ -605,7 +605,6 @@ void initializeObjects() {
 	lcd[0][22] = 3;
 	lcd[1][18] = 3;
 	lcd[0][37] = 3;
-
 
 	//[0][38] [0][39] [1][38] [1][39]  are dead
 	//Wolves

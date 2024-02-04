@@ -29570,3 +29570,1966 @@ arm-none-eabi-size   TankGame.elf
   31372	    216	   3048	  34636	   874c	TankGame.elf
 Finished building: default.size.stdout
  
+14:49:14 **** Incremental Build of configuration Debug for project TankGame ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303xC -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:188:4: warning: implicit declaration of function 'HealthSetting' [-Wimplicit-function-declaration]
+  188 |    HealthSetting();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:191:4: warning: implicit declaration of function 'bulletsSetting' [-Wimplicit-function-declaration]
+  191 |    bulletsSetting();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:195:4: warning: implicit declaration of function 'refreshAll' [-Wimplicit-function-declaration]
+  195 |    refreshAll();
+      |    ^~~~~~~~~~
+../Core/Src/main.c:196:4: warning: implicit declaration of function 'initializeObjects' [-Wimplicit-function-declaration]
+  196 |    initializeObjects();
+      |    ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:197:4: warning: implicit declaration of function 'displayObjects' [-Wimplicit-function-declaration]
+  197 |    displayObjects();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:203:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  203 |   HAL_UART_Transmit(&huart1, "2", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:207:4: warning: implicit declaration of function 'setCursor' [-Wimplicit-function-declaration]
+  207 |    setCursor(20, 0);
+      |    ^~~~~~~~~
+../Core/Src/main.c:208:4: warning: implicit declaration of function 'print' [-Wimplicit-function-declaration]
+  208 |    print("                    ");
+      |    ^~~~~
+../Core/Src/main.c:211:4: warning: implicit declaration of function 'showAbout' [-Wimplicit-function-declaration]
+  211 |    showAbout();
+      |    ^~~~~~~~~
+../Core/Src/main.c:216:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  216 |   HAL_UART_Transmit(&huart1, "3", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:224:4: warning: implicit declaration of function 'showSetting' [-Wimplicit-function-declaration]
+  224 |    showSetting();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c:229:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  229 |   HAL_UART_Transmit(&huart1, "4", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:243:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  243 |   HAL_UART_Transmit(&huart1, "5", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:248:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  248 |   HAL_UART_Transmit(&huart1, "6", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:250:3: warning: implicit declaration of function 'changeFoxStateR' [-Wimplicit-function-declaration]
+  250 |   changeFoxStateR(0);
+      |   ^~~~~~~~~~~~~~~
+../Core/Src/main.c:253:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  253 |   HAL_UART_Transmit(&huart1, "7", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:261:14: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  261 |   if (screen == 4 | screen == 5) {
+      |       ~~~~~~~^~~~
+../Core/Src/main.c:266:4: warning: implicit declaration of function 'showMain' [-Wimplicit-function-declaration]
+  266 |    showMain();
+      |    ^~~~~~~~
+../Core/Src/main.c:269:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  269 |   HAL_UART_Transmit(&huart1, "B", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:284:4: warning: implicit declaration of function 'movement' [-Wimplicit-function-declaration]
+  284 |    movement(&playerR, currentStateR);
+      |    ^~~~~~~~
+../Core/Src/main.c:308:7: warning: suggest parentheses around assignment used as truth value [-Wparentheses]
+  308 |   if (screen = 3) {
+      |       ^~~~~~
+../Core/Src/main.c:328:14: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  328 |   if (screen == 4 | screen == 5) {
+      |       ~~~~~~~^~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:343:6: warning: conflicting types for 'refreshAll'
+  343 | void refreshAll(void) {
+      |      ^~~~~~~~~~
+../Core/Src/main.c:195:4: note: previous implicit declaration of 'refreshAll' was here
+  195 |    refreshAll();
+      |    ^~~~~~~~~~
+../Core/Src/main.c:370:6: warning: conflicting types for 'changeFoxStateR'
+  370 | void changeFoxStateR(int Player) {
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/main.c:250:3: note: previous implicit declaration of 'changeFoxStateR' was here
+  250 |   changeFoxStateR(0);
+      |   ^~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'changeFoxStateR':
+../Core/Src/main.c:375:3: warning: implicit declaration of function 'createChar' [-Wimplicit-function-declaration]
+  375 |   createChar(7, currentFoxR);
+      |   ^~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:409:6: warning: conflicting types for 'movement'
+  409 | void movement(Player *player, int currentState) {
+      |      ^~~~~~~~
+../Core/Src/main.c:284:4: note: previous implicit declaration of 'movement' was here
+  284 |    movement(&playerR, currentStateR);
+      |    ^~~~~~~~
+../Core/Src/main.c: In function 'movement':
+../Core/Src/main.c:427:17: warning: passing argument 2 of 'increase' from incompatible pointer type [-Wincompatible-pointer-types]
+  427 |      increase(1,&player);
+      |                 ^~~~~~~
+      |                 |
+      |                 Player **
+../Core/Src/main.c:382:37: note: expected 'Player *' but argument is of type 'Player **'
+  382 | void increase(int isHealth, Player *player) {
+      |                             ~~~~~~~~^~~~~~
+../Core/Src/main.c:430:17: warning: passing argument 2 of 'increase' from incompatible pointer type [-Wincompatible-pointer-types]
+  430 |      increase(0,&player);
+      |                 ^~~~~~~
+      |                 |
+      |                 Player **
+../Core/Src/main.c:382:37: note: expected 'Player *' but argument is of type 'Player **'
+  382 | void increase(int isHealth, Player *player) {
+      |                             ~~~~~~~~^~~~~~
+../Core/Src/main.c:436:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  436 |    HAL_UART_Transmit(&huart1, "CANT TOP", 8,
+      |                               ^~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:452:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  452 |    HAL_UART_Transmit(&huart1, "CANT RIGHt", 10,
+      |                               ^~~~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:469:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  469 |    HAL_UART_Transmit(&huart1, "CANT LEFT", 9,
+      |                               ^~~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:484:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  484 |    HAL_UART_Transmit(&huart1, "CANT BOT", 8,
+      |                               ^~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:494:2: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
+  494 |  write(' ');
+      |  ^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:502:6: warning: conflicting types for 'initializeObjects'
+  502 | void initializeObjects() {
+      |      ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:196:4: note: previous implicit declaration of 'initializeObjects' was here
+  196 |    initializeObjects();
+      |    ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:567:6: warning: conflicting types for 'displayObjects'
+  567 | void displayObjects() {
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:197:4: note: previous implicit declaration of 'displayObjects' was here
+  197 |    displayObjects();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:578:6: warning: conflicting types for 'showMain'
+  578 | void showMain(void) {
+      |      ^~~~~~~~
+../Core/Src/main.c:266:4: note: previous implicit declaration of 'showMain' was here
+  266 |    showMain();
+      |    ^~~~~~~~
+../Core/Src/main.c:588:6: warning: conflicting types for 'showAbout'
+  588 | void showAbout(void) {
+      |      ^~~~~~~~~
+../Core/Src/main.c:211:4: note: previous implicit declaration of 'showAbout' was here
+  211 |    showAbout();
+      |    ^~~~~~~~~
+../Core/Src/main.c:593:6: warning: conflicting types for 'showSetting'
+  593 | void showSetting(void) {
+      |      ^~~~~~~~~~~
+../Core/Src/main.c:224:4: note: previous implicit declaration of 'showSetting' was here
+  224 |    showSetting();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c:602:6: warning: conflicting types for 'bulletsSetting'
+  602 | void bulletsSetting(void) {
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:191:4: note: previous implicit declaration of 'bulletsSetting' was here
+  191 |    bulletsSetting();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'bulletsSetting':
+../Core/Src/main.c:605:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  605 |  sprintf(RBStr, "Right Bullets:%d", R_bullets);
+      |  ^~~~~~~
+../Core/Src/main.c:605:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:23:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   22 | #include <time.h>
+  +++ |+#include <stdio.h>
+   23 | /* Private includes ----------------------------------------------------------*/
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:617:6: warning: conflicting types for 'HealthSetting'
+  617 | void HealthSetting(void) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:188:4: note: previous implicit declaration of 'HealthSetting' was here
+  188 |    HealthSetting();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HealthSetting':
+../Core/Src/main.c:620:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+  620 |  sprintf(RBStr, "Right Health:%d", R_Health);
+      |  ^~~~~~~
+../Core/Src/main.c:620:2: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:671:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  671 |  HAL_UART_Transmit(&huart1, "yo", 2,
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:675:2: warning: implicit declaration of function 'LiquidCrystal' [-Wimplicit-function-declaration]
+  675 |  LiquidCrystal(GPIOD, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11,
+      |  ^~~~~~~~~~~~~
+../Core/Src/main.c:707:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+  707 |    sprintf(timeStr, "%2d:%2d:%2d", mytime.Hours, mytime.Minutes,
+      |    ^~~~~~~
+../Core/Src/main.c:707:4: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c:678:8: warning: unused variable 'foxStates' [-Wunused-variable]
+  678 |  byte *foxStates[4] = { leftFox, rightFox, topFox, bottomFox };
+      |        ^~~~~~~~~
+arm-none-eabi-gcc -o "TankGame.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\STM32F303VCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="TankGame.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: TankGame.elf
+ 
+arm-none-eabi-size   TankGame.elf 
+arm-none-eabi-objdump -h -S  TankGame.elf  > "TankGame.list"
+   text	   data	    bss	    dec	    hex	filename
+  31528	    216	   3048	  34792	   87e8	TankGame.elf
+Finished building: default.size.stdout
+ 
+Finished building: TankGame.list
+ 
+14:50:58 **** Incremental Build of configuration Debug for project TankGame ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303xC -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:188:4: warning: implicit declaration of function 'HealthSetting' [-Wimplicit-function-declaration]
+  188 |    HealthSetting();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:191:4: warning: implicit declaration of function 'bulletsSetting' [-Wimplicit-function-declaration]
+  191 |    bulletsSetting();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:195:4: warning: implicit declaration of function 'refreshAll' [-Wimplicit-function-declaration]
+  195 |    refreshAll();
+      |    ^~~~~~~~~~
+../Core/Src/main.c:196:4: warning: implicit declaration of function 'initializeObjects' [-Wimplicit-function-declaration]
+  196 |    initializeObjects();
+      |    ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:197:4: warning: implicit declaration of function 'displayObjects' [-Wimplicit-function-declaration]
+  197 |    displayObjects();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:203:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  203 |   HAL_UART_Transmit(&huart1, "2", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:207:4: warning: implicit declaration of function 'setCursor' [-Wimplicit-function-declaration]
+  207 |    setCursor(20, 0);
+      |    ^~~~~~~~~
+../Core/Src/main.c:208:4: warning: implicit declaration of function 'print' [-Wimplicit-function-declaration]
+  208 |    print("                    ");
+      |    ^~~~~
+../Core/Src/main.c:211:4: warning: implicit declaration of function 'showAbout' [-Wimplicit-function-declaration]
+  211 |    showAbout();
+      |    ^~~~~~~~~
+../Core/Src/main.c:216:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  216 |   HAL_UART_Transmit(&huart1, "3", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:224:4: warning: implicit declaration of function 'showSetting' [-Wimplicit-function-declaration]
+  224 |    showSetting();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c:229:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  229 |   HAL_UART_Transmit(&huart1, "4", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:243:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  243 |   HAL_UART_Transmit(&huart1, "5", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:248:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  248 |   HAL_UART_Transmit(&huart1, "6", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:250:3: warning: implicit declaration of function 'changeFoxStateR' [-Wimplicit-function-declaration]
+  250 |   changeFoxStateR(0);
+      |   ^~~~~~~~~~~~~~~
+../Core/Src/main.c:253:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  253 |   HAL_UART_Transmit(&huart1, "7", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:261:14: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  261 |   if (screen == 4 | screen == 5) {
+      |       ~~~~~~~^~~~
+../Core/Src/main.c:266:4: warning: implicit declaration of function 'showMain' [-Wimplicit-function-declaration]
+  266 |    showMain();
+      |    ^~~~~~~~
+../Core/Src/main.c:269:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  269 |   HAL_UART_Transmit(&huart1, "B", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:284:4: warning: implicit declaration of function 'movement' [-Wimplicit-function-declaration]
+  284 |    movement(&playerR, currentStateR);
+      |    ^~~~~~~~
+../Core/Src/main.c:308:7: warning: suggest parentheses around assignment used as truth value [-Wparentheses]
+  308 |   if (screen = 3) {
+      |       ^~~~~~
+../Core/Src/main.c:328:14: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  328 |   if (screen == 4 | screen == 5) {
+      |       ~~~~~~~^~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:343:6: warning: conflicting types for 'refreshAll'
+  343 | void refreshAll(void) {
+      |      ^~~~~~~~~~
+../Core/Src/main.c:195:4: note: previous implicit declaration of 'refreshAll' was here
+  195 |    refreshAll();
+      |    ^~~~~~~~~~
+../Core/Src/main.c:370:6: warning: conflicting types for 'changeFoxStateR'
+  370 | void changeFoxStateR(int Player) {
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/main.c:250:3: note: previous implicit declaration of 'changeFoxStateR' was here
+  250 |   changeFoxStateR(0);
+      |   ^~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'changeFoxStateR':
+../Core/Src/main.c:375:3: warning: implicit declaration of function 'createChar' [-Wimplicit-function-declaration]
+  375 |   createChar(7, currentFoxR);
+      |   ^~~~~~~~~~
+../Core/Src/main.c: In function 'increase':
+../Core/Src/main.c:384:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  384 |    HAL_UART_Transmit(&huart1, "HART", 4,
+      |                               ^~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:398:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  398 |   HAL_UART_Transmit(&huart1, "BULT", 4,
+      |                              ^~~~~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:413:6: warning: conflicting types for 'movement'
+  413 | void movement(Player *player, int currentState) {
+      |      ^~~~~~~~
+../Core/Src/main.c:284:4: note: previous implicit declaration of 'movement' was here
+  284 |    movement(&playerR, currentStateR);
+      |    ^~~~~~~~
+../Core/Src/main.c: In function 'movement':
+../Core/Src/main.c:431:17: warning: passing argument 2 of 'increase' from incompatible pointer type [-Wincompatible-pointer-types]
+  431 |      increase(1,&player);
+      |                 ^~~~~~~
+      |                 |
+      |                 Player **
+../Core/Src/main.c:382:37: note: expected 'Player *' but argument is of type 'Player **'
+  382 | void increase(int isHealth, Player *player) {
+      |                             ~~~~~~~~^~~~~~
+../Core/Src/main.c:434:17: warning: passing argument 2 of 'increase' from incompatible pointer type [-Wincompatible-pointer-types]
+  434 |      increase(0,&player);
+      |                 ^~~~~~~
+      |                 |
+      |                 Player **
+../Core/Src/main.c:382:37: note: expected 'Player *' but argument is of type 'Player **'
+  382 | void increase(int isHealth, Player *player) {
+      |                             ~~~~~~~~^~~~~~
+../Core/Src/main.c:440:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  440 |    HAL_UART_Transmit(&huart1, "CANT TOP", 8,
+      |                               ^~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:456:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  456 |    HAL_UART_Transmit(&huart1, "CANT RIGHt", 10,
+      |                               ^~~~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:473:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  473 |    HAL_UART_Transmit(&huart1, "CANT LEFT", 9,
+      |                               ^~~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:488:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  488 |    HAL_UART_Transmit(&huart1, "CANT BOT", 8,
+      |                               ^~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:498:2: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
+  498 |  write(' ');
+      |  ^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:506:6: warning: conflicting types for 'initializeObjects'
+  506 | void initializeObjects() {
+      |      ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:196:4: note: previous implicit declaration of 'initializeObjects' was here
+  196 |    initializeObjects();
+      |    ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:571:6: warning: conflicting types for 'displayObjects'
+  571 | void displayObjects() {
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:197:4: note: previous implicit declaration of 'displayObjects' was here
+  197 |    displayObjects();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:582:6: warning: conflicting types for 'showMain'
+  582 | void showMain(void) {
+      |      ^~~~~~~~
+../Core/Src/main.c:266:4: note: previous implicit declaration of 'showMain' was here
+  266 |    showMain();
+      |    ^~~~~~~~
+../Core/Src/main.c:592:6: warning: conflicting types for 'showAbout'
+  592 | void showAbout(void) {
+      |      ^~~~~~~~~
+../Core/Src/main.c:211:4: note: previous implicit declaration of 'showAbout' was here
+  211 |    showAbout();
+      |    ^~~~~~~~~
+../Core/Src/main.c:597:6: warning: conflicting types for 'showSetting'
+  597 | void showSetting(void) {
+      |      ^~~~~~~~~~~
+../Core/Src/main.c:224:4: note: previous implicit declaration of 'showSetting' was here
+  224 |    showSetting();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c:606:6: warning: conflicting types for 'bulletsSetting'
+  606 | void bulletsSetting(void) {
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:191:4: note: previous implicit declaration of 'bulletsSetting' was here
+  191 |    bulletsSetting();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'bulletsSetting':
+../Core/Src/main.c:609:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  609 |  sprintf(RBStr, "Right Bullets:%d", R_bullets);
+      |  ^~~~~~~
+../Core/Src/main.c:609:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:23:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   22 | #include <time.h>
+  +++ |+#include <stdio.h>
+   23 | /* Private includes ----------------------------------------------------------*/
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:621:6: warning: conflicting types for 'HealthSetting'
+  621 | void HealthSetting(void) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:188:4: note: previous implicit declaration of 'HealthSetting' was here
+  188 |    HealthSetting();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HealthSetting':
+../Core/Src/main.c:624:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+  624 |  sprintf(RBStr, "Right Health:%d", R_Health);
+      |  ^~~~~~~
+../Core/Src/main.c:624:2: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:675:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  675 |  HAL_UART_Transmit(&huart1, "yo", 2,
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:679:2: warning: implicit declaration of function 'LiquidCrystal' [-Wimplicit-function-declaration]
+  679 |  LiquidCrystal(GPIOD, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11,
+      |  ^~~~~~~~~~~~~
+../Core/Src/main.c:711:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+  711 |    sprintf(timeStr, "%2d:%2d:%2d", mytime.Hours, mytime.Minutes,
+      |    ^~~~~~~
+../Core/Src/main.c:711:4: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c:682:8: warning: unused variable 'foxStates' [-Wunused-variable]
+  682 |  byte *foxStates[4] = { leftFox, rightFox, topFox, bottomFox };
+      |        ^~~~~~~~~
+arm-none-eabi-gcc -o "TankGame.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\STM32F303VCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="TankGame.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: TankGame.elf
+ 
+arm-none-eabi-size   TankGame.elf 
+arm-none-eabi-objdump -h -S  TankGame.elf  > "TankGame.list"
+   text	   data	    bss	    dec	    hex	filename
+  31580	    216	   3048	  34844	   881c	TankGame.elf
+Finished building: default.size.stdout
+ 
+Finished building: TankGame.list
+ 
+17:13:21 **** Incremental Build of configuration Debug for project TankGame ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303xC -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:188:4: warning: implicit declaration of function 'HealthSetting' [-Wimplicit-function-declaration]
+  188 |    HealthSetting();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:191:4: warning: implicit declaration of function 'bulletsSetting' [-Wimplicit-function-declaration]
+  191 |    bulletsSetting();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:195:4: warning: implicit declaration of function 'refreshAll' [-Wimplicit-function-declaration]
+  195 |    refreshAll();
+      |    ^~~~~~~~~~
+../Core/Src/main.c:196:4: warning: implicit declaration of function 'initializeObjects' [-Wimplicit-function-declaration]
+  196 |    initializeObjects();
+      |    ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:197:4: warning: implicit declaration of function 'displayObjects' [-Wimplicit-function-declaration]
+  197 |    displayObjects();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:203:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  203 |   HAL_UART_Transmit(&huart1, "2", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:207:4: warning: implicit declaration of function 'setCursor' [-Wimplicit-function-declaration]
+  207 |    setCursor(20, 0);
+      |    ^~~~~~~~~
+../Core/Src/main.c:208:4: warning: implicit declaration of function 'print' [-Wimplicit-function-declaration]
+  208 |    print("                    ");
+      |    ^~~~~
+../Core/Src/main.c:211:4: warning: implicit declaration of function 'showAbout' [-Wimplicit-function-declaration]
+  211 |    showAbout();
+      |    ^~~~~~~~~
+../Core/Src/main.c:216:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  216 |   HAL_UART_Transmit(&huart1, "3", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:224:4: warning: implicit declaration of function 'showSetting' [-Wimplicit-function-declaration]
+  224 |    showSetting();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c:229:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  229 |   HAL_UART_Transmit(&huart1, "4", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:243:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  243 |   HAL_UART_Transmit(&huart1, "5", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:248:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  248 |   HAL_UART_Transmit(&huart1, "6", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:250:3: warning: implicit declaration of function 'changeFoxStateR' [-Wimplicit-function-declaration]
+  250 |   changeFoxStateR(0);
+      |   ^~~~~~~~~~~~~~~
+../Core/Src/main.c:253:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  253 |   HAL_UART_Transmit(&huart1, "7", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:261:14: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  261 |   if (screen == 4 | screen == 5) {
+      |       ~~~~~~~^~~~
+../Core/Src/main.c:266:4: warning: implicit declaration of function 'showMain' [-Wimplicit-function-declaration]
+  266 |    showMain();
+      |    ^~~~~~~~
+../Core/Src/main.c:269:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  269 |   HAL_UART_Transmit(&huart1, "B", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:284:4: warning: implicit declaration of function 'movement' [-Wimplicit-function-declaration]
+  284 |    movement(&playerR, currentStateR);
+      |    ^~~~~~~~
+../Core/Src/main.c:308:7: warning: suggest parentheses around assignment used as truth value [-Wparentheses]
+  308 |   if (screen = 3) {
+      |       ^~~~~~
+../Core/Src/main.c:328:14: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  328 |   if (screen == 4 | screen == 5) {
+      |       ~~~~~~~^~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:343:6: warning: conflicting types for 'refreshAll'
+  343 | void refreshAll(void) {
+      |      ^~~~~~~~~~
+../Core/Src/main.c:195:4: note: previous implicit declaration of 'refreshAll' was here
+  195 |    refreshAll();
+      |    ^~~~~~~~~~
+../Core/Src/main.c:370:6: warning: conflicting types for 'changeFoxStateR'
+  370 | void changeFoxStateR(int Player) {
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/main.c:250:3: note: previous implicit declaration of 'changeFoxStateR' was here
+  250 |   changeFoxStateR(0);
+      |   ^~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'changeFoxStateR':
+../Core/Src/main.c:375:3: warning: implicit declaration of function 'createChar' [-Wimplicit-function-declaration]
+  375 |   createChar(7, currentFoxR);
+      |   ^~~~~~~~~~
+../Core/Src/main.c: In function 'increase':
+../Core/Src/main.c:384:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  384 |    HAL_UART_Transmit(&huart1, "HART", 4,
+      |                               ^~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:398:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  398 |   HAL_UART_Transmit(&huart1, "BULT", 4,
+      |                              ^~~~~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:413:6: warning: conflicting types for 'movement'
+  413 | void movement(Player *player, int currentState) {
+      |      ^~~~~~~~
+../Core/Src/main.c:284:4: note: previous implicit declaration of 'movement' was here
+  284 |    movement(&playerR, currentStateR);
+      |    ^~~~~~~~
+../Core/Src/main.c: In function 'movement':
+../Core/Src/main.c:440:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  440 |    HAL_UART_Transmit(&huart1, "CANT TOP", 8,
+      |                               ^~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:456:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  456 |    HAL_UART_Transmit(&huart1, "CANT RIGHt", 10,
+      |                               ^~~~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:473:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  473 |    HAL_UART_Transmit(&huart1, "CANT LEFT", 9,
+      |                               ^~~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:488:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  488 |    HAL_UART_Transmit(&huart1, "CANT BOT", 8,
+      |                               ^~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:498:2: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
+  498 |  write(' ');
+      |  ^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:506:6: warning: conflicting types for 'initializeObjects'
+  506 | void initializeObjects() {
+      |      ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:196:4: note: previous implicit declaration of 'initializeObjects' was here
+  196 |    initializeObjects();
+      |    ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:571:6: warning: conflicting types for 'displayObjects'
+  571 | void displayObjects() {
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:197:4: note: previous implicit declaration of 'displayObjects' was here
+  197 |    displayObjects();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:582:6: warning: conflicting types for 'showMain'
+  582 | void showMain(void) {
+      |      ^~~~~~~~
+../Core/Src/main.c:266:4: note: previous implicit declaration of 'showMain' was here
+  266 |    showMain();
+      |    ^~~~~~~~
+../Core/Src/main.c:592:6: warning: conflicting types for 'showAbout'
+  592 | void showAbout(void) {
+      |      ^~~~~~~~~
+../Core/Src/main.c:211:4: note: previous implicit declaration of 'showAbout' was here
+  211 |    showAbout();
+      |    ^~~~~~~~~
+../Core/Src/main.c:597:6: warning: conflicting types for 'showSetting'
+  597 | void showSetting(void) {
+      |      ^~~~~~~~~~~
+../Core/Src/main.c:224:4: note: previous implicit declaration of 'showSetting' was here
+  224 |    showSetting();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c:606:6: warning: conflicting types for 'bulletsSetting'
+  606 | void bulletsSetting(void) {
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:191:4: note: previous implicit declaration of 'bulletsSetting' was here
+  191 |    bulletsSetting();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'bulletsSetting':
+../Core/Src/main.c:609:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  609 |  sprintf(RBStr, "Right Bullets:%d", R_bullets);
+      |  ^~~~~~~
+../Core/Src/main.c:609:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:23:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   22 | #include <time.h>
+  +++ |+#include <stdio.h>
+   23 | /* Private includes ----------------------------------------------------------*/
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:621:6: warning: conflicting types for 'HealthSetting'
+  621 | void HealthSetting(void) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:188:4: note: previous implicit declaration of 'HealthSetting' was here
+  188 |    HealthSetting();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HealthSetting':
+../Core/Src/main.c:624:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+  624 |  sprintf(RBStr, "Right Health:%d", R_Health);
+      |  ^~~~~~~
+../Core/Src/main.c:624:2: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:675:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  675 |  HAL_UART_Transmit(&huart1, "yo", 2,
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:679:2: warning: implicit declaration of function 'LiquidCrystal' [-Wimplicit-function-declaration]
+  679 |  LiquidCrystal(GPIOD, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11,
+      |  ^~~~~~~~~~~~~
+../Core/Src/main.c:711:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+  711 |    sprintf(timeStr, "%2d:%2d:%2d", mytime.Hours, mytime.Minutes,
+      |    ^~~~~~~
+../Core/Src/main.c:711:4: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c:682:8: warning: unused variable 'foxStates' [-Wunused-variable]
+  682 |  byte *foxStates[4] = { leftFox, rightFox, topFox, bottomFox };
+      |        ^~~~~~~~~
+arm-none-eabi-gcc -o "TankGame.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\STM32F303VCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="TankGame.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: TankGame.elf
+ 
+arm-none-eabi-size   TankGame.elf 
+arm-none-eabi-objdump -h -S  TankGame.elf  > "TankGame.list"
+   text	   data	    bss	    dec	    hex	filename
+  31580	    216	   3048	  34844	   881c	TankGame.elf
+Finished building: default.size.stdout
+ 
+Finished building: TankGame.list
+ 
+17:19:22 **** Incremental Build of configuration Debug for project TankGame ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303xC -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:188:4: warning: implicit declaration of function 'HealthSetting' [-Wimplicit-function-declaration]
+  188 |    HealthSetting();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:191:4: warning: implicit declaration of function 'bulletsSetting' [-Wimplicit-function-declaration]
+  191 |    bulletsSetting();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:195:4: warning: implicit declaration of function 'refreshAll' [-Wimplicit-function-declaration]
+  195 |    refreshAll();
+      |    ^~~~~~~~~~
+../Core/Src/main.c:196:4: warning: implicit declaration of function 'initializeObjects' [-Wimplicit-function-declaration]
+  196 |    initializeObjects();
+      |    ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:197:4: warning: implicit declaration of function 'displayObjects' [-Wimplicit-function-declaration]
+  197 |    displayObjects();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:203:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  203 |   HAL_UART_Transmit(&huart1, "2", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:207:4: warning: implicit declaration of function 'setCursor' [-Wimplicit-function-declaration]
+  207 |    setCursor(20, 0);
+      |    ^~~~~~~~~
+../Core/Src/main.c:208:4: warning: implicit declaration of function 'print' [-Wimplicit-function-declaration]
+  208 |    print("                    ");
+      |    ^~~~~
+../Core/Src/main.c:211:4: warning: implicit declaration of function 'showAbout' [-Wimplicit-function-declaration]
+  211 |    showAbout();
+      |    ^~~~~~~~~
+../Core/Src/main.c:216:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  216 |   HAL_UART_Transmit(&huart1, "3", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:224:4: warning: implicit declaration of function 'showSetting' [-Wimplicit-function-declaration]
+  224 |    showSetting();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c:229:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  229 |   HAL_UART_Transmit(&huart1, "4", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:243:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  243 |   HAL_UART_Transmit(&huart1, "5", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:248:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  248 |   HAL_UART_Transmit(&huart1, "6", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:250:3: warning: implicit declaration of function 'changeFoxStateR' [-Wimplicit-function-declaration]
+  250 |   changeFoxStateR(0);
+      |   ^~~~~~~~~~~~~~~
+../Core/Src/main.c:253:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  253 |   HAL_UART_Transmit(&huart1, "7", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:261:14: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  261 |   if (screen == 4 | screen == 5) {
+      |       ~~~~~~~^~~~
+../Core/Src/main.c:266:4: warning: implicit declaration of function 'showMain' [-Wimplicit-function-declaration]
+  266 |    showMain();
+      |    ^~~~~~~~
+../Core/Src/main.c:269:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  269 |   HAL_UART_Transmit(&huart1, "B", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:284:4: warning: implicit declaration of function 'movement' [-Wimplicit-function-declaration]
+  284 |    movement(&playerR, currentStateR);
+      |    ^~~~~~~~
+../Core/Src/main.c:308:7: warning: suggest parentheses around assignment used as truth value [-Wparentheses]
+  308 |   if (screen = 3) {
+      |       ^~~~~~
+../Core/Src/main.c:328:14: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  328 |   if (screen == 4 | screen == 5) {
+      |       ~~~~~~~^~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:343:6: warning: conflicting types for 'refreshAll'
+  343 | void refreshAll(void) {
+      |      ^~~~~~~~~~
+../Core/Src/main.c:195:4: note: previous implicit declaration of 'refreshAll' was here
+  195 |    refreshAll();
+      |    ^~~~~~~~~~
+../Core/Src/main.c:370:6: warning: conflicting types for 'changeFoxStateR'
+  370 | void changeFoxStateR(int Player) {
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/main.c:250:3: note: previous implicit declaration of 'changeFoxStateR' was here
+  250 |   changeFoxStateR(0);
+      |   ^~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'changeFoxStateR':
+../Core/Src/main.c:375:3: warning: implicit declaration of function 'createChar' [-Wimplicit-function-declaration]
+  375 |   createChar(7, currentFoxR);
+      |   ^~~~~~~~~~
+../Core/Src/main.c: In function 'increase':
+../Core/Src/main.c:384:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  384 |   HAL_UART_Transmit(&huart1, "HART", 4,
+      |                              ^~~~~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:398:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  398 |   HAL_UART_Transmit(&huart1, "BULT", 4,
+      |                              ^~~~~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:413:6: warning: conflicting types for 'movement'
+  413 | void movement(Player *player, int currentState) {
+      |      ^~~~~~~~
+../Core/Src/main.c:284:4: note: previous implicit declaration of 'movement' was here
+  284 |    movement(&playerR, currentStateR);
+      |    ^~~~~~~~
+../Core/Src/main.c: In function 'movement':
+../Core/Src/main.c:446:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  446 |    HAL_UART_Transmit(&huart1, "CANT TOP", 8,
+      |                               ^~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:474:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  474 |    HAL_UART_Transmit(&huart1, "CANT RIGHt", 10,
+      |                               ^~~~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:506:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  506 |    HAL_UART_Transmit(&huart1, "CANT LEFT", 9,
+      |                               ^~~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:534:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  534 |    HAL_UART_Transmit(&huart1, "CANT BOT", 8,
+      |                               ^~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:544:2: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
+  544 |  write(' ');
+      |  ^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:552:6: warning: conflicting types for 'initializeObjects'
+  552 | void initializeObjects() {
+      |      ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:196:4: note: previous implicit declaration of 'initializeObjects' was here
+  196 |    initializeObjects();
+      |    ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:617:6: warning: conflicting types for 'displayObjects'
+  617 | void displayObjects() {
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:197:4: note: previous implicit declaration of 'displayObjects' was here
+  197 |    displayObjects();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:628:6: warning: conflicting types for 'showMain'
+  628 | void showMain(void) {
+      |      ^~~~~~~~
+../Core/Src/main.c:266:4: note: previous implicit declaration of 'showMain' was here
+  266 |    showMain();
+      |    ^~~~~~~~
+../Core/Src/main.c:638:6: warning: conflicting types for 'showAbout'
+  638 | void showAbout(void) {
+      |      ^~~~~~~~~
+../Core/Src/main.c:211:4: note: previous implicit declaration of 'showAbout' was here
+  211 |    showAbout();
+      |    ^~~~~~~~~
+../Core/Src/main.c:643:6: warning: conflicting types for 'showSetting'
+  643 | void showSetting(void) {
+      |      ^~~~~~~~~~~
+../Core/Src/main.c:224:4: note: previous implicit declaration of 'showSetting' was here
+  224 |    showSetting();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c:652:6: warning: conflicting types for 'bulletsSetting'
+  652 | void bulletsSetting(void) {
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:191:4: note: previous implicit declaration of 'bulletsSetting' was here
+  191 |    bulletsSetting();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'bulletsSetting':
+../Core/Src/main.c:655:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  655 |  sprintf(RBStr, "Right Bullets:%d", R_bullets);
+      |  ^~~~~~~
+../Core/Src/main.c:655:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:23:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   22 | #include <time.h>
+  +++ |+#include <stdio.h>
+   23 | /* Private includes ----------------------------------------------------------*/
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:667:6: warning: conflicting types for 'HealthSetting'
+  667 | void HealthSetting(void) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:188:4: note: previous implicit declaration of 'HealthSetting' was here
+  188 |    HealthSetting();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HealthSetting':
+../Core/Src/main.c:670:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+  670 |  sprintf(RBStr, "Right Health:%d", R_Health);
+      |  ^~~~~~~
+../Core/Src/main.c:670:2: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:721:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  721 |  HAL_UART_Transmit(&huart1, "yo", 2,
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:725:2: warning: implicit declaration of function 'LiquidCrystal' [-Wimplicit-function-declaration]
+  725 |  LiquidCrystal(GPIOD, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11,
+      |  ^~~~~~~~~~~~~
+../Core/Src/main.c:757:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+  757 |    sprintf(timeStr, "%2d:%2d:%2d", mytime.Hours, mytime.Minutes,
+      |    ^~~~~~~
+../Core/Src/main.c:757:4: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c:728:8: warning: unused variable 'foxStates' [-Wunused-variable]
+  728 |  byte *foxStates[4] = { leftFox, rightFox, topFox, bottomFox };
+      |        ^~~~~~~~~
+arm-none-eabi-gcc -o "TankGame.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\STM32F303VCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="TankGame.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: TankGame.elf
+ 
+arm-none-eabi-size   TankGame.elf 
+arm-none-eabi-objdump -h -S  TankGame.elf  > "TankGame.list"
+   text	   data	    bss	    dec	    hex	filename
+  32020	    216	   3048	  35284	   89d4	TankGame.elf
+Finished building: default.size.stdout
+ 
+Finished building: TankGame.list
+ 
+17:23:40 **** Incremental Build of configuration Debug for project TankGame ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303xC -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:188:4: warning: implicit declaration of function 'HealthSetting' [-Wimplicit-function-declaration]
+  188 |    HealthSetting();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:191:4: warning: implicit declaration of function 'bulletsSetting' [-Wimplicit-function-declaration]
+  191 |    bulletsSetting();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:195:4: warning: implicit declaration of function 'refreshAll' [-Wimplicit-function-declaration]
+  195 |    refreshAll();
+      |    ^~~~~~~~~~
+../Core/Src/main.c:196:4: warning: implicit declaration of function 'initializeObjects' [-Wimplicit-function-declaration]
+  196 |    initializeObjects();
+      |    ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:197:4: warning: implicit declaration of function 'displayObjects' [-Wimplicit-function-declaration]
+  197 |    displayObjects();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:203:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  203 |   HAL_UART_Transmit(&huart1, "2", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:207:4: warning: implicit declaration of function 'setCursor' [-Wimplicit-function-declaration]
+  207 |    setCursor(20, 0);
+      |    ^~~~~~~~~
+../Core/Src/main.c:208:4: warning: implicit declaration of function 'print' [-Wimplicit-function-declaration]
+  208 |    print("                    ");
+      |    ^~~~~
+../Core/Src/main.c:211:4: warning: implicit declaration of function 'showAbout' [-Wimplicit-function-declaration]
+  211 |    showAbout();
+      |    ^~~~~~~~~
+../Core/Src/main.c:216:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  216 |   HAL_UART_Transmit(&huart1, "3", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:224:4: warning: implicit declaration of function 'showSetting' [-Wimplicit-function-declaration]
+  224 |    showSetting();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c:229:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  229 |   HAL_UART_Transmit(&huart1, "4", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:243:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  243 |   HAL_UART_Transmit(&huart1, "5", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:248:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  248 |   HAL_UART_Transmit(&huart1, "6", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:250:3: warning: implicit declaration of function 'changeFoxStateR' [-Wimplicit-function-declaration]
+  250 |   changeFoxStateR(0);
+      |   ^~~~~~~~~~~~~~~
+../Core/Src/main.c:253:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  253 |   HAL_UART_Transmit(&huart1, "7", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:261:14: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  261 |   if (screen == 4 | screen == 5) {
+      |       ~~~~~~~^~~~
+../Core/Src/main.c:266:4: warning: implicit declaration of function 'showMain' [-Wimplicit-function-declaration]
+  266 |    showMain();
+      |    ^~~~~~~~
+../Core/Src/main.c:269:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  269 |   HAL_UART_Transmit(&huart1, "B", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:284:4: warning: implicit declaration of function 'movement' [-Wimplicit-function-declaration]
+  284 |    movement(&playerR, currentStateR);
+      |    ^~~~~~~~
+../Core/Src/main.c:308:7: warning: suggest parentheses around assignment used as truth value [-Wparentheses]
+  308 |   if (screen = 3) {
+      |       ^~~~~~
+../Core/Src/main.c:328:14: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  328 |   if (screen == 4 | screen == 5) {
+      |       ~~~~~~~^~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:343:6: warning: conflicting types for 'refreshAll'
+  343 | void refreshAll(void) {
+      |      ^~~~~~~~~~
+../Core/Src/main.c:195:4: note: previous implicit declaration of 'refreshAll' was here
+  195 |    refreshAll();
+      |    ^~~~~~~~~~
+../Core/Src/main.c:370:6: warning: conflicting types for 'changeFoxStateR'
+  370 | void changeFoxStateR(int Player) {
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/main.c:250:3: note: previous implicit declaration of 'changeFoxStateR' was here
+  250 |   changeFoxStateR(0);
+      |   ^~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'changeFoxStateR':
+../Core/Src/main.c:375:3: warning: implicit declaration of function 'createChar' [-Wimplicit-function-declaration]
+  375 |   createChar(7, currentFoxR);
+      |   ^~~~~~~~~~
+../Core/Src/main.c: In function 'increase':
+../Core/Src/main.c:384:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  384 |   HAL_UART_Transmit(&huart1, "HART", 4,
+      |                              ^~~~~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:398:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  398 |   HAL_UART_Transmit(&huart1, "BULT", 4,
+      |                              ^~~~~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:413:6: warning: conflicting types for 'movement'
+  413 | void movement(Player *player, int currentState) {
+      |      ^~~~~~~~
+../Core/Src/main.c:284:4: note: previous implicit declaration of 'movement' was here
+  284 |    movement(&playerR, currentStateR);
+      |    ^~~~~~~~
+../Core/Src/main.c: In function 'movement':
+../Core/Src/main.c:446:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  446 |    HAL_UART_Transmit(&huart1, "CANT TOP", 8,
+      |                               ^~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:474:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  474 |    HAL_UART_Transmit(&huart1, "CANT RIGHt", 10,
+      |                               ^~~~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:506:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  506 |    HAL_UART_Transmit(&huart1, "CANT LEFT", 9,
+      |                               ^~~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:534:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  534 |    HAL_UART_Transmit(&huart1, "CANT BOT", 8,
+      |                               ^~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:544:2: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
+  544 |  write(' ');
+      |  ^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:552:6: warning: conflicting types for 'initializeObjects'
+  552 | void initializeObjects() {
+      |      ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:196:4: note: previous implicit declaration of 'initializeObjects' was here
+  196 |    initializeObjects();
+      |    ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:619:6: warning: conflicting types for 'displayObjects'
+  619 | void displayObjects() {
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:197:4: note: previous implicit declaration of 'displayObjects' was here
+  197 |    displayObjects();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:630:6: warning: conflicting types for 'showMain'
+  630 | void showMain(void) {
+      |      ^~~~~~~~
+../Core/Src/main.c:266:4: note: previous implicit declaration of 'showMain' was here
+  266 |    showMain();
+      |    ^~~~~~~~
+../Core/Src/main.c:640:6: warning: conflicting types for 'showAbout'
+  640 | void showAbout(void) {
+      |      ^~~~~~~~~
+../Core/Src/main.c:211:4: note: previous implicit declaration of 'showAbout' was here
+  211 |    showAbout();
+      |    ^~~~~~~~~
+../Core/Src/main.c:645:6: warning: conflicting types for 'showSetting'
+  645 | void showSetting(void) {
+      |      ^~~~~~~~~~~
+../Core/Src/main.c:224:4: note: previous implicit declaration of 'showSetting' was here
+  224 |    showSetting();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c:654:6: warning: conflicting types for 'bulletsSetting'
+  654 | void bulletsSetting(void) {
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:191:4: note: previous implicit declaration of 'bulletsSetting' was here
+  191 |    bulletsSetting();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'bulletsSetting':
+../Core/Src/main.c:657:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  657 |  sprintf(RBStr, "Right Bullets:%d", R_bullets);
+      |  ^~~~~~~
+../Core/Src/main.c:657:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:23:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   22 | #include <time.h>
+  +++ |+#include <stdio.h>
+   23 | /* Private includes ----------------------------------------------------------*/
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:669:6: warning: conflicting types for 'HealthSetting'
+  669 | void HealthSetting(void) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:188:4: note: previous implicit declaration of 'HealthSetting' was here
+  188 |    HealthSetting();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HealthSetting':
+../Core/Src/main.c:672:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+  672 |  sprintf(RBStr, "Right Health:%d", R_Health);
+      |  ^~~~~~~
+../Core/Src/main.c:672:2: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:723:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  723 |  HAL_UART_Transmit(&huart1, "yo", 2,
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:727:2: warning: implicit declaration of function 'LiquidCrystal' [-Wimplicit-function-declaration]
+  727 |  LiquidCrystal(GPIOD, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11,
+      |  ^~~~~~~~~~~~~
+../Core/Src/main.c:759:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+  759 |    sprintf(timeStr, "%2d:%2d:%2d", mytime.Hours, mytime.Minutes,
+      |    ^~~~~~~
+../Core/Src/main.c:759:4: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c:730:8: warning: unused variable 'foxStates' [-Wunused-variable]
+  730 |  byte *foxStates[4] = { leftFox, rightFox, topFox, bottomFox };
+      |        ^~~~~~~~~
+arm-none-eabi-gcc -o "TankGame.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\STM32F303VCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="TankGame.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: TankGame.elf
+ 
+arm-none-eabi-size   TankGame.elf 
+arm-none-eabi-objdump -h -S  TankGame.elf  > "TankGame.list"
+   text	   data	    bss	    dec	    hex	filename
+  32032	    216	   3048	  35296	   89e0	TankGame.elf
+Finished building: default.size.stdout
+ 
+Finished building: TankGame.list
+ 
+17:26:25 **** Incremental Build of configuration Debug for project TankGame ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303xC -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:188:4: warning: implicit declaration of function 'HealthSetting' [-Wimplicit-function-declaration]
+  188 |    HealthSetting();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:191:4: warning: implicit declaration of function 'bulletsSetting' [-Wimplicit-function-declaration]
+  191 |    bulletsSetting();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:195:4: warning: implicit declaration of function 'refreshAll' [-Wimplicit-function-declaration]
+  195 |    refreshAll();
+      |    ^~~~~~~~~~
+../Core/Src/main.c:196:4: warning: implicit declaration of function 'initializeObjects' [-Wimplicit-function-declaration]
+  196 |    initializeObjects();
+      |    ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:197:4: warning: implicit declaration of function 'displayObjects' [-Wimplicit-function-declaration]
+  197 |    displayObjects();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:203:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  203 |   HAL_UART_Transmit(&huart1, "2", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:207:4: warning: implicit declaration of function 'setCursor' [-Wimplicit-function-declaration]
+  207 |    setCursor(20, 0);
+      |    ^~~~~~~~~
+../Core/Src/main.c:208:4: warning: implicit declaration of function 'print' [-Wimplicit-function-declaration]
+  208 |    print("                    ");
+      |    ^~~~~
+../Core/Src/main.c:211:4: warning: implicit declaration of function 'showAbout' [-Wimplicit-function-declaration]
+  211 |    showAbout();
+      |    ^~~~~~~~~
+../Core/Src/main.c:216:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  216 |   HAL_UART_Transmit(&huart1, "3", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:224:4: warning: implicit declaration of function 'showSetting' [-Wimplicit-function-declaration]
+  224 |    showSetting();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c:229:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  229 |   HAL_UART_Transmit(&huart1, "4", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:243:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  243 |   HAL_UART_Transmit(&huart1, "5", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:248:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  248 |   HAL_UART_Transmit(&huart1, "6", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:250:3: warning: implicit declaration of function 'changeFoxStateR' [-Wimplicit-function-declaration]
+  250 |   changeFoxStateR(0);
+      |   ^~~~~~~~~~~~~~~
+../Core/Src/main.c:253:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  253 |   HAL_UART_Transmit(&huart1, "7", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:261:14: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  261 |   if (screen == 4 | screen == 5) {
+      |       ~~~~~~~^~~~
+../Core/Src/main.c:266:4: warning: implicit declaration of function 'showMain' [-Wimplicit-function-declaration]
+  266 |    showMain();
+      |    ^~~~~~~~
+../Core/Src/main.c:269:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  269 |   HAL_UART_Transmit(&huart1, "B", 1,
+      |                              ^~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:284:4: warning: implicit declaration of function 'movement' [-Wimplicit-function-declaration]
+  284 |    movement(&playerR, currentStateR);
+      |    ^~~~~~~~
+../Core/Src/main.c:308:7: warning: suggest parentheses around assignment used as truth value [-Wparentheses]
+  308 |   if (screen = 3) {
+      |       ^~~~~~
+../Core/Src/main.c:328:14: warning: suggest parentheses around comparison in operand of '|' [-Wparentheses]
+  328 |   if (screen == 4 | screen == 5) {
+      |       ~~~~~~~^~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:343:6: warning: conflicting types for 'refreshAll'
+  343 | void refreshAll(void) {
+      |      ^~~~~~~~~~
+../Core/Src/main.c:195:4: note: previous implicit declaration of 'refreshAll' was here
+  195 |    refreshAll();
+      |    ^~~~~~~~~~
+../Core/Src/main.c:370:6: warning: conflicting types for 'changeFoxStateR'
+  370 | void changeFoxStateR(int Player) {
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/main.c:250:3: note: previous implicit declaration of 'changeFoxStateR' was here
+  250 |   changeFoxStateR(0);
+      |   ^~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'changeFoxStateR':
+../Core/Src/main.c:375:3: warning: implicit declaration of function 'createChar' [-Wimplicit-function-declaration]
+  375 |   createChar(7, currentFoxR);
+      |   ^~~~~~~~~~
+../Core/Src/main.c: In function 'increase':
+../Core/Src/main.c:384:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  384 |   HAL_UART_Transmit(&huart1, "HART", 4,
+      |                              ^~~~~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:398:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  398 |   HAL_UART_Transmit(&huart1, "BULT", 4,
+      |                              ^~~~~~
+      |                              |
+      |                              char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:413:6: warning: conflicting types for 'movement'
+  413 | void movement(Player *player, int currentState) {
+      |      ^~~~~~~~
+../Core/Src/main.c:284:4: note: previous implicit declaration of 'movement' was here
+  284 |    movement(&playerR, currentStateR);
+      |    ^~~~~~~~
+../Core/Src/main.c: In function 'movement':
+../Core/Src/main.c:446:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  446 |    HAL_UART_Transmit(&huart1, "CANT TOP", 8,
+      |                               ^~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:474:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  474 |    HAL_UART_Transmit(&huart1, "CANT RIGHt", 10,
+      |                               ^~~~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:506:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  506 |    HAL_UART_Transmit(&huart1, "CANT LEFT", 9,
+      |                               ^~~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:534:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  534 |    HAL_UART_Transmit(&huart1, "CANT BOT", 8,
+      |                               ^~~~~~~~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:544:2: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
+  544 |  write(' ');
+      |  ^~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:552:6: warning: conflicting types for 'initializeObjects'
+  552 | void initializeObjects() {
+      |      ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:196:4: note: previous implicit declaration of 'initializeObjects' was here
+  196 |    initializeObjects();
+      |    ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:618:6: warning: conflicting types for 'displayObjects'
+  618 | void displayObjects() {
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:197:4: note: previous implicit declaration of 'displayObjects' was here
+  197 |    displayObjects();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c:629:6: warning: conflicting types for 'showMain'
+  629 | void showMain(void) {
+      |      ^~~~~~~~
+../Core/Src/main.c:266:4: note: previous implicit declaration of 'showMain' was here
+  266 |    showMain();
+      |    ^~~~~~~~
+../Core/Src/main.c:639:6: warning: conflicting types for 'showAbout'
+  639 | void showAbout(void) {
+      |      ^~~~~~~~~
+../Core/Src/main.c:211:4: note: previous implicit declaration of 'showAbout' was here
+  211 |    showAbout();
+      |    ^~~~~~~~~
+../Core/Src/main.c:644:6: warning: conflicting types for 'showSetting'
+  644 | void showSetting(void) {
+      |      ^~~~~~~~~~~
+../Core/Src/main.c:224:4: note: previous implicit declaration of 'showSetting' was here
+  224 |    showSetting();
+      |    ^~~~~~~~~~~
+../Core/Src/main.c:653:6: warning: conflicting types for 'bulletsSetting'
+  653 | void bulletsSetting(void) {
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:191:4: note: previous implicit declaration of 'bulletsSetting' was here
+  191 |    bulletsSetting();
+      |    ^~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'bulletsSetting':
+../Core/Src/main.c:656:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  656 |  sprintf(RBStr, "Right Bullets:%d", R_bullets);
+      |  ^~~~~~~
+../Core/Src/main.c:656:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:23:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   22 | #include <time.h>
+  +++ |+#include <stdio.h>
+   23 | /* Private includes ----------------------------------------------------------*/
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:668:6: warning: conflicting types for 'HealthSetting'
+  668 | void HealthSetting(void) {
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:188:4: note: previous implicit declaration of 'HealthSetting' was here
+  188 |    HealthSetting();
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HealthSetting':
+../Core/Src/main.c:671:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+  671 |  sprintf(RBStr, "Right Health:%d", R_Health);
+      |  ^~~~~~~
+../Core/Src/main.c:671:2: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:722:29: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  722 |  HAL_UART_Transmit(&huart1, "yo", 2,
+      |                             ^~~~
+      |                             |
+      |                             char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:327,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:726:2: warning: implicit declaration of function 'LiquidCrystal' [-Wimplicit-function-declaration]
+  726 |  LiquidCrystal(GPIOD, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11,
+      |  ^~~~~~~~~~~~~
+../Core/Src/main.c:758:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+  758 |    sprintf(timeStr, "%2d:%2d:%2d", mytime.Hours, mytime.Minutes,
+      |    ^~~~~~~
+../Core/Src/main.c:758:4: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c:729:8: warning: unused variable 'foxStates' [-Wunused-variable]
+  729 |  byte *foxStates[4] = { leftFox, rightFox, topFox, bottomFox };
+      |        ^~~~~~~~~
+arm-none-eabi-gcc -o "TankGame.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\STM32F303VCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="TankGame.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: TankGame.elf
+ 
+arm-none-eabi-size   TankGame.elf 
+arm-none-eabi-objdump -h -S  TankGame.elf  > "TankGame.list"
+   text	   data	    bss	    dec	    hex	filename
+  32020	    216	   3048	  35284	   89d4	TankGame.elf
+Finished building: default.size.stdout
+ 
+Finished building: TankGame.list
+ 
