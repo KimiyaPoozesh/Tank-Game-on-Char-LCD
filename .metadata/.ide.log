@@ -1381,3 +1381,104 @@
 2024-01-30 15:56:02,953 [INFO] ProjectBuilder:4351 - Time for Generating toolchain IDE Files: 3711mS.
 2024-01-30 15:56:02,955 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 1mS.
 2024-01-30 15:56:02,957 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 0mS.
+2024-01-30 16:49:32,778 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 759766208 Bytes (908066816)
+2024-01-30 16:49:32,874 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 573202608 Bytes (908066816)
+2024-01-30 16:49:37,813 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 650797232 Bytes (908066816)
+2024-01-30 16:49:38,118 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SPI
+2024-01-30 16:49:38,119 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS
+2024-01-30 16:49:38,119 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2024-01-30 16:49:38,119 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: I2C
+2024-01-30 16:49:38,119 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RTC
+2024-01-30 16:49:38,119 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2024-01-30 16:49:38,119 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: USART
+2024-01-30 16:49:38,119 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: USB
+2024-01-30 16:49:38,119 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2024-01-30 16:49:38,120 [INFO] CodeGenerator:692 - code generatio: config db path: C:\ST\STM32CubeIDE_1.11.2\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.7.0.202301130839\\db\
+2024-01-30 16:49:38,146 [WARN] IP:2112 - lpm_enable not found: check if there is a RefParameter without a condition.
+2024-01-30 16:49:38,424 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\MXTmpFiles\license.tmp_save
+2024-01-30 16:49:38,582 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\MXTmpFiles\license.tmp
+2024-01-30 16:49:38,736 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\MXTmpFiles\gpio.tmp_save
+2024-01-30 16:49:38,903 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\MXTmpFiles\gpio.tmp
+2024-01-30 16:49:40,094 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Src\stm32f3xx_it.c_save
+2024-01-30 16:49:40,473 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Src\stm32f3xx_it.c
+2024-01-30 16:49:40,490 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Inc\stm32f3xx_it.h_save
+2024-01-30 16:49:40,593 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Inc\stm32f3xx_it.h
+2024-01-30 16:49:40,616 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Src\stm32f3xx_hal_msp.c_save
+2024-01-30 16:49:40,902 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Src\stm32f3xx_hal_msp.c
+2024-01-30 16:49:40,919 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\MXTmpFiles\system.tmp_save
+2024-01-30 16:49:41,025 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\MXTmpFiles\system.tmp
+2024-01-30 16:49:41,052 [INFO] CodeEngine:303 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Inc\stm32f3xx_hal_conf.h_save
+2024-01-30 16:49:41,234 [INFO] CodeEngine:327 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Inc\stm32f3xx_hal_conf.h
+2024-01-30 16:49:41,349 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Inc\main.h_save
+2024-01-30 16:49:41,596 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Inc\main.h
+2024-01-30 16:49:41,620 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Src\main.c_save
+2024-01-30 16:49:42,164 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Src\main.c
+2024-01-30 16:49:43,376 [INFO] ProjectBuilder:2919 - Time for Copy HAL[1] : 200mS.
+2024-01-30 16:49:43,381 [INFO] ProjectBuilder:4183 - Project Generator version: 3.18.0-B7
+2024-01-30 16:49:44,053 [INFO] ConfigFileManager:1396 - The Die is : DIE422
+2024-01-30 16:49:46,214 [INFO] ProjectBuilder:4351 - Time for Generating toolchain IDE Files: 2833mS.
+2024-01-30 16:49:46,215 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 0mS.
+2024-01-30 16:49:46,218 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 0mS.
+2024-01-30 16:57:46,869 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 605451456 Bytes (963641344)
+2024-01-30 16:57:46,948 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 624244000 Bytes (963641344)
+2024-01-30 16:57:47,129 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 692882776 Bytes (963641344)
+2024-01-30 16:57:47,519 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SPI
+2024-01-30 16:57:47,519 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: SYS
+2024-01-30 16:57:47,519 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2024-01-30 16:57:47,519 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: I2C
+2024-01-30 16:57:47,519 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RTC
+2024-01-30 16:57:47,520 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2024-01-30 16:57:47,520 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: USART
+2024-01-30 16:57:47,520 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: USB
+2024-01-30 16:57:47,520 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2024-01-30 16:57:47,522 [INFO] CodeGenerator:692 - code generatio: config db path: C:\ST\STM32CubeIDE_1.11.2\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.7.0.202301130839\\db\
+2024-01-30 16:57:47,565 [WARN] IP:2112 - lpm_enable not found: check if there is a RefParameter without a condition.
+2024-01-30 16:57:47,872 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\MXTmpFiles\license.tmp_save
+2024-01-30 16:57:48,043 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\MXTmpFiles\license.tmp
+2024-01-30 16:57:48,439 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\MXTmpFiles\gpio.tmp_save
+2024-01-30 16:57:48,585 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\MXTmpFiles\gpio.tmp
+2024-01-30 16:57:49,638 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Src\stm32f3xx_it.c_save
+2024-01-30 16:57:49,998 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Src\stm32f3xx_it.c
+2024-01-30 16:57:50,006 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Inc\stm32f3xx_it.h_save
+2024-01-30 16:57:50,097 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Inc\stm32f3xx_it.h
+2024-01-30 16:57:50,122 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Src\stm32f3xx_hal_msp.c_save
+2024-01-30 16:57:50,358 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Src\stm32f3xx_hal_msp.c
+2024-01-30 16:57:50,366 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\MXTmpFiles\system.tmp_save
+2024-01-30 16:57:50,465 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\MXTmpFiles\system.tmp
+2024-01-30 16:57:50,492 [INFO] CodeEngine:303 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Inc\stm32f3xx_hal_conf.h_save
+2024-01-30 16:57:50,650 [INFO] CodeEngine:327 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Inc\stm32f3xx_hal_conf.h
+2024-01-30 16:57:50,719 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Inc\main.h_save
+2024-01-30 16:57:50,906 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Inc\main.h
+2024-01-30 16:57:50,925 [INFO] CodeEngine:247 - oldGeneratedFile, D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Src\main.c_save
+2024-01-30 16:57:51,103 [INFO] CodeEngine:271 - Generated code: D:\University\TERM 7\MicroControler\Final Project\Tank-Game-on-Char-LCD\TankGame\Core\Src\main.c
+2024-01-30 16:57:52,020 [INFO] ProjectBuilder:2919 - Time for Copy HAL[1] : 291mS.
+2024-01-30 16:57:52,026 [INFO] ProjectBuilder:4183 - Project Generator version: 3.18.0-B7
+2024-01-30 16:57:52,467 [INFO] ConfigFileManager:1396 - The Die is : DIE422
+2024-01-30 16:57:54,588 [INFO] ProjectBuilder:4351 - Time for Generating toolchain IDE Files: 2562mS.
+2024-01-30 16:57:54,589 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 1mS.
+2024-01-30 16:57:54,596 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 0mS.
+2024-02-01 01:47:07,368 [INFO] JxBrowserEngine:114 - Initiate JxBrowser Engine with user profile folder
+2024-02-01 01:47:11,260 [INFO] WebAppUi:459 - Close the Jxbrowser engine manually
+2024-02-01 01:47:11,294 [INFO] WebAppUi:462 - Profiles folder deleted
+2024-02-01 01:47:11,711 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] 
+2024-02-04 09:41:43,584 [INFO] Activator:179 - 
+
+
+2024-02-04 09:41:43,607 [INFO] Activator:180 - !SESSION log4j initialized
+2024-02-04 09:42:16,283 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2024-02-04 09:42:16,284 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2024-02-04 09:42:16,285 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2024-02-04 10:23:12,016 [INFO] Activator:179 - 
+
+
+2024-02-04 10:23:12,017 [INFO] Activator:180 - !SESSION log4j initialized
+2024-02-04 10:23:45,053 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2024-02-04 10:23:45,054 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2024-02-04 10:23:45,055 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2024-02-04 12:57:12,211 [INFO] Activator:179 - 
+
+
+2024-02-04 12:57:12,214 [INFO] Activator:180 - !SESSION log4j initialized
+2024-02-04 12:57:44,427 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2024-02-04 12:57:44,430 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2024-02-04 12:57:44,433 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.

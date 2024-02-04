@@ -63,6 +63,17 @@ int L_Health = 0;
 int R_bullets = 0;
 int L_bullets = 0;
 int vfx = 1; //1 if on 0 if off
+typedef unsigned char byte;
+byte bullet[8] = { 0x08, 0x1C, 0x0B, 0x07, 0x0E, 0x1C, 0x08, 0x00 };
+byte heart[8] = { 0x00, 0x0A, 0x1F, 0x1F, 0x1F, 0x0E, 0x04, 0x00 };
+byte MisteryBox[8] = { 0x1F, 0x11, 0x15, 0x1D, 0x1B, 0x1B, 0x1F, 0x1B };
+byte wall[8] = { 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F };
+byte obstacle[8] = { 0x1F, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x1F };
+byte leftFox[8] = { 0x00, 0x00, 0x06, 0x1A, 0x0F, 0x1A, 0x06, 0x00 };
+byte rightFox[8] = { 0x00, 0x00, 0x0C, 0x0B, 0x1E, 0x0B, 0x0C, 0x00 };
+byte topFox[8] = { 0x00, 0x00, 0x00, 0x0A, 0x0E, 0x15, 0x1F, 0x04 };
+byte bottomFox[8] = { 0x00, 0x04, 0x1F, 0x15, 0x0E, 0x0A, 0x00, 0x00 };
+
 typedef struct {
 	int x;
 	int y;
@@ -73,16 +84,27 @@ typedef struct {
 	int y;
 	char c;
 } heartOBJ;
-typedef struct{
+typedef struct {
 	int x;
 	int y;
 	char c;
-}bulletOBJ;
-typedef struct{
+} bulletOBJ;
+typedef struct {
 	int x;
 	int y;
 	char c;
-}obstacleOBJ;
+} obstacleOBJ;
+typedef struct {
+	int x;
+	int y;
+	char c;
+} Player;
+
+Player playerR;
+Player playerL;
+byte *foxStates[4] = { leftFox, rightFox, topFox, bottomFox };
+int currentStateR = 0;
+int currentStateL = 0;
 heartOBJ hearts[NUM_HEARTS];
 misteryBoxOBJ boxes[NUM_BOXES];
 bulletOBJ bullets[NUM_BULLETS];
@@ -257,6 +279,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 			R_bullets = (R_bullets + 1) % 10;
 			bulletsSetting();
 		}
+		//right player
+		if (screen == 1) {
+			movement(&playerR, currentStateR);
+		}
 		break;
 	case 10:
 		/* code */
@@ -271,6 +297,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		} else if (screen == 5) {
 			L_bullets = (L_bullets + 1) % 10;
 			bulletsSetting();
+		}
+		if (screen == 1) {
+			movement(&playerL, currentStateL);
 		}
 		/* code */
 		break;
@@ -337,40 +366,89 @@ static void MX_RTC_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-typedef unsigned char byte;
-byte bullet[8] = { 0x08, 0x1C, 0x0B, 0x07, 0x0E, 0x1C, 0x08, 0x00 };
-byte heart[8] = { 0x00, 0x0A, 0x1F, 0x1F, 0x1F, 0x0E, 0x04, 0x00 };
-byte MisteryBox[8] = { 0x1F, 0x11, 0x15, 0x1D, 0x1B, 0x1B, 0x1F, 0x1B };
-byte wall[8] = { 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F };
-byte obstacle[8] = { 0x1F, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x1F };
-byte leftFox[8] = { 0x00, 0x00, 0x06, 0x1A, 0x0F, 0x1A, 0x06, 0x00 };
-byte rightFox[8] = { 0x00, 0x00, 0x0C, 0x0B, 0x1E, 0x0B, 0x0C, 0x00 };
-byte topFox[8] = { 0x00, 0x00, 0x00, 0x0A, 0x0E, 0x15, 0x1F, 0x04 };
-byte bottomFox[8] = { 0x00, 0x04, 0x1F, 0x15, 0x0E, 0x0A, 0x00, 0x00 };
-
-byte* foxStates[4] = { leftFox, rightFox, topFox, bottomFox };
-int currentStateR = 0;
-int currentStateL = 0;
-
 
 void changeFoxStateR(int Player) {
-    byte* currentFoxR = foxStates[currentStateR];
-    byte* currentFoxL = foxStates[currentStateL];
+	byte *currentFoxR = foxStates[currentStateR];
+	byte *currentFoxL = foxStates[currentStateL];
 
-    if (!Player) {
-    		createChar(7, currentFoxR);
-    		currentStateR = (currentStateR + 1) % 4;
-    	} else {
-    		createChar(8, currentFoxL);
-    		currentStateL = (currentStateL + 1) % 4;
-    	}
+	if (!Player) {
+		createChar(7, currentFoxR);
+		currentStateR = (currentStateR + 1) % 4;
+	} else {
+		createChar(8, currentFoxL);
+		currentStateL = (currentStateL + 1) % 4;
+	}
 }
 
+void movement(Player *player, int currentState) {
+	char buffer[50]; // Buffer to hold the string
 
+	sprintf(buffer, "Player X: %d, Player Y: %d", player->x, player->y); // Convert integers to string
 
+	HAL_UART_Transmit(&huart1, (uint8_t*) buffer, strlen(buffer),
+	HAL_MAX_DELAY); // Transmit string over UART
+	int oldX = player->x;
+	int oldY = player->y;
+	switch (currentState) {
+	case 0:	//top
+		if (player->x == 1 && lcd[0][player->y] != 4
+				&& lcd[0][player->y] != 3) {
+			player->x = 0;
+		} else if (player->x == 0 && player->y >= 20) {
+			if (lcd[1][(player->y) - 20] != 4
+					&& lcd[1][(player->y) - 20] != 3) {
+				player->x = 1;
+				player->y = (player->y) - 20;
+				HAL_UART_Transmit(&huart1, "TB", 2,
+				HAL_MAX_DELAY);
+			}
+		} else {
+			HAL_UART_Transmit(&huart1, "CANT TOP", 8,
+			HAL_MAX_DELAY);
+		}
+		break;
+
+	case 3:	//bot
+		HAL_UART_Transmit(&huart1, "HERE", 4,
+		HAL_MAX_DELAY);
+		if (player->x == 0 && lcd[1][player->y] != 4
+				&& lcd[1][player->y] != 3) {
+			player->x = 1;
+		} else if (player->x == 1 && player->y < 20) {
+			HAL_UART_Transmit(&huart1, "OBJ BLOCK", 9,
+			HAL_MAX_DELAY);
+			if (lcd[0][(player->y) + 20] != 4) {
+				player->x = 0;
+				player->y = (player->y) + 20;
+				HAL_UART_Transmit(&huart1, "BB", 2,
+				HAL_MAX_DELAY);
+			}
+		} else {
+			HAL_UART_Transmit(&huart1, "CANT BOT", 8,
+			HAL_MAX_DELAY);
+		}
+		break;
+	}
+
+	lcd[player->x][player->y] = player->c;
+
+	// Clear the old position on the LCD
+	setCursor(oldY, oldX);
+	write(' ');
+
+	// Write the player's character at the new position on the LCD
+	setCursor(player->y, player->x);
+	write(player->c);
+
+}
 
 void initializeObjects() {
-
+	playerR.x = 1;
+	playerR.y = 19;
+	playerR.c = 7;
+	playerL.c = 8;
+	playerL.x = 1;
+	playerL.y = 0;
 	for (int i = 0; i < LCD_HEIGHT; i++) {
 		for (int j = 0; j < LCD_WIDTH; j++) {
 			lcd[i][j] = ' ';  // Empty cell
@@ -393,16 +471,16 @@ void initializeObjects() {
 
 	//bullets
 	for (int i = 0; i < NUM_BULLETS; i++) {
-			bullets[i].x = 3 + rand() % 28;  // Random number between 3 and 30
-			bullets[i].y = rand() % 2;       // Random number between 0 and 1
-			bullets[i].c = 5;
-		}
+		bullets[i].x = 3 + rand() % 28;  // Random number between 3 and 30
+		bullets[i].y = rand() % 2;       // Random number between 0 and 1
+		bullets[i].c = 5;
+	}
 	//obstacles
 	for (int i = 0; i < NUM_OBSTACLE; i++) {
-				obstacles[i].x = 3 + rand() % 28;  // Random number between 3 and 30
-				obstacles[i].y = rand() % 2;       // Random number between 0 and 1
-				obstacles[i].c = 4;
-			}
+		obstacles[i].x = 3 + rand() % 28;  // Random number between 3 and 30
+		obstacles[i].y = rand() % 2;       // Random number between 0 and 1
+		obstacles[i].c = 4;
+	}
 	for (int i = 0; i < NUM_HEARTS; i++) {
 		lcd[hearts[i].y][hearts[i].x] = hearts[i].c;
 	}
@@ -410,21 +488,23 @@ void initializeObjects() {
 		lcd[bullets[i].y][bullets[i].x] = bullets[i].c;
 	}
 	for (int i = 0; i < NUM_BOXES; i++) {
-			lcd[boxes[i].y][boxes[i].x] = boxes[i].c;
-		}
+		lcd[boxes[i].y][boxes[i].x] = boxes[i].c;
+	}
 	for (int i = 0; i < NUM_OBSTACLE; i++) {
-				lcd[obstacles[i].y][obstacles[i].x] = obstacles[i].c;
-			}
+		lcd[obstacles[i].y][obstacles[i].x] = obstacles[i].c;
+	}
 	//WALLS
-	lcd[1][1]=3;
-	lcd[0][22]=3;
-	lcd[1][18]=3;
-	lcd[0][37]=3;
+	lcd[1][1] = 3;
+	lcd[0][22] = 3;
+	lcd[1][18] = 3;
+	lcd[0][37] = 3;
 
 	//[0][38] [0][39] [1][38] [1][39]  are dead
 	//Wolves
-	lcd[1][0]=8;
-	lcd[1][19]=7;
+	lcd[playerR.x][playerR.y] = playerR.c;
+	lcd[playerL.x][playerL.y] = playerL.c;
+	//lcd[1][0]=8;
+	//lcd[1][19]=7;
 }
 
 void displayObjects() {
@@ -538,13 +618,13 @@ int main(void) {
 	LiquidCrystal(GPIOD, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11,
 	GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14);
 
-	byte* foxStates[4] = { leftFox, rightFox, topFox, bottomFox };
+	byte *foxStates[4] = { leftFox, rightFox, topFox, bottomFox };
 
 	createChar(2, MisteryBox);
 	createChar(3, wall);
 	createChar(4, obstacle);
 	createChar(1, heart);
-	createChar(5,bullet);
+	createChar(5, bullet);
 	RTC_TimeTypeDef mytime;
 	RTC_DateTypeDef mydate;
 	mydate.Year = 19;
