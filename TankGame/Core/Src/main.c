@@ -52,6 +52,7 @@ RTC_HandleTypeDef hrtc;
 SPI_HandleTypeDef hspi1;
 
 TIM_HandleTypeDef htim1;
+TIM_HandleTypeDef htim2;
 
 UART_HandleTypeDef huart1;
 
@@ -63,15 +64,17 @@ typedef enum {
 } Direction;
 
 int screen = 0; //0=main 1=play 2=about 3=setting 4=health 5=bullets
-int R_Health = 0;
-int L_Health = 0;
-int R_bullets = 0;
-int L_bullets = 0;
+int R_Health = 5;
+int L_Health = 5;
+int R_bullets = 2;
+int L_bullets = 1;
 int dir = 0;
 int shotedR = 0;
 int shotedL = 0;
 int shootFlag = 0;
 int vfx = 1; //1 if on 0 if off
+int win = 0;
+
 typedef unsigned char byte;
 byte bullet[8] = { 0x08, 0x1C, 0x0B, 0x07, 0x0E, 0x1C, 0x08, 0x00 };
 byte heart[8] = { 0x00, 0x0A, 0x1F, 0x1F, 0x1F, 0x0E, 0x04, 0x00 };
@@ -109,6 +112,7 @@ typedef struct {
 	int y;
 	Direction direction;
 	char c;
+	int score;
 } Player;
 typedef struct {
 	int col;
@@ -216,7 +220,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 			displayObjects();
 		}
 		if (screen == 1) {
-			shoot(&playerR);
+			if (R_bullets > 0) {
+				R_bullets--;
+				shoot(&playerR);
+				HAL_UART_Transmit(&huart1, "-Bullet for right", 16, 100000);
+			}
 		}
 
 		/* code */
@@ -248,7 +256,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		break;
 	case 4:
 		if (screen == 1) {
-			shoot(&playerL);
+			if (L_bullets > 0) {
+				L_bullets--;
+				shoot(&playerL);
+				HAL_UART_Transmit(&huart1, "-Bullet for left", 15, 100000);
+			}
 			//shot(playerR.x, playerR.y + 1, currentStateR % 2);
 		}
 
@@ -384,6 +396,7 @@ static void MX_USB_PCD_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_RTC_Init(void);
 static void MX_TIM1_Init(void);
+static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -434,15 +447,10 @@ void changeFoxStateR(int Player) {
 	default:
 		break;
 	}
-	char buffer[50];
-	sprintf(buffer, "The current state of the fox (currentStateL) is: %d\n",
-			currentStateL);
-	HAL_UART_Transmit(&huart1, (uint8_t*) buffer, strlen(buffer), 1000);
+
 }
 void increase(int isHealth, Player *player) {
 	if (isHealth) {
-		HAL_UART_Transmit(&huart1, "HART", 4,
-		HAL_MAX_DELAY);
 		if (player->c == 7) {
 			R_Health++;
 			if (R_Health > 9) {
@@ -455,8 +463,6 @@ void increase(int isHealth, Player *player) {
 			}
 		}
 	} else {
-		HAL_UART_Transmit(&huart1, "BULT", 4,
-		HAL_MAX_DELAY);
 		if (player->c == 7) {
 			R_bullets++;
 			if (R_bullets > 9) {
@@ -472,10 +478,10 @@ void increase(int isHealth, Player *player) {
 }
 
 void shoot(Player *player) {
-//  if (hasBullet(player) == 0) {
-//    return;
-//  }
-//  decreaseBullet(player);
+
+	if (vfx) {
+		playExplosionSound();
+	}
 
 	num_shooted_bullet++;
 
@@ -562,21 +568,32 @@ void shotPosition() {
 				fires[k].isAlive = 0;
 			} else if (f == 3) { //if barrier
 				lcd[fires[k].row][fires[k].col] = ' ';
-				HAL_UART_Transmit(&huart1, lcd[fires[k].row][fires[k].col], 1, 100000);
+//				HAL_UART_Transmit(&huart1, lcd[fires[k].row][fires[k].col], 1,
+//						100000);
 				fires[k].isAlive = 0;
 			} else if (fires[k].col == playerR.y && fires[k].row == playerR.x) {
-				//decreaseHealth(&player[0]);
+				//decreaseHealth playerR ;
+				R_Health--;
+				playerL.score++;
+				if (vfx) {
+					playTankHitSound();
+				}
 				fires[k].isAlive = 0;
 			} else if (fires[k].col == playerL.y && fires[k].row == playerL.x) {
-				//decreaseHealth(&playerL]);
+				//decreaseHealth(playerL);
+				L_Health--;
+				playerR.score++;
+				if (vfx) {
+					playTankHitSound();
+				}
 				fires[k].isAlive = 0;
 			} else if (fires[k].col < 0 || fires[k].col >= 40
 					|| fires[k].row < 0 || fires[k].row >= 2) {
 				fires[k].isAlive = 0;
 			}
 
-			if (!(col == playerR.y && row == playerR.x)
-					&& !(col == playerL.y && row == playerR.x)) {
+			if (!(col == playerR.x && row == playerR.y)
+					&& !(col == playerL.x && row == playerR.y)) {
 				setCursor(col, row);
 				print(" ");
 				HAL_Delay(500);
@@ -586,8 +603,10 @@ void shotPosition() {
 				setCursor(fires[k].col, fires[k].row);
 				write(6);
 			} else {
-				num_shooted_bullet--;
+				//num_shooted_bullet--;
 				shootFlag = 0;
+				setCursor(col, row);
+				print(" ");
 				fires[k].col = -1;
 				fires[k].row = -1;
 			}
@@ -867,25 +886,39 @@ void HealthSetting(void) {
 	print("#-Confirm");
 }
 
+TIM_HandleTypeDef *pwm_timer = &htim2; // Point to PWM timer configured in CubeMX
+uint32_t pwm_channel = TIM_CHANNEL_2;  // Specify configured PWM channel
+
+void PWM_Start() {
+	HAL_TIM_PWM_Start(pwm_timer, pwm_channel);
+}
+
+void PWM_Change_Tone(uint16_t pwm_freq, uint16_t volume) // pwm_freq (1 - 20000), volume (0 - 1000)
+{
+	if (pwm_freq == 0 || pwm_freq > 20000) {
+		__HAL_TIM_SET_COMPARE(pwm_timer, pwm_channel, 0);
+	} else {
+		const uint32_t internal_clock_freq = HAL_RCC_GetSysClockFreq();
+		const uint16_t prescaler = 1 + internal_clock_freq / pwm_freq / 60000;
+		const uint32_t timer_clock = internal_clock_freq / prescaler;
+		const uint32_t period_cycles = timer_clock / pwm_freq;
+		const uint32_t pulse_width = volume * period_cycles / 1000 / 2;
+
+		pwm_timer->Instance->PSC = prescaler - 1;
+		pwm_timer->Instance->ARR = period_cycles - 1;
+		pwm_timer->Instance->EGR = TIM_EGR_UG;
+		__HAL_TIM_SET_COMPARE(pwm_timer, pwm_channel, pulse_width); // pwm_timer->Instance->CCR2 = pulse_width;
+	}
+}
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 //	if (htim->Instance == TIM1) {
-//		if (shotedR) {
-//			HAL_UART_Transmit(&huart1, "TIMER", 5,
-//					HAL_MAX_DELAY);
-//			if (!shot(playerR.x, playerR.y + 1, currentStateR % 2)) {
-//				shotedR = 0;
-//			} else {
-//				shot(playerR.x, playerR.y + 1, currentStateR % 2);
-//			}
-//		}
-//		if (shotedL) {
-//			if (!shot(playerL.x, playerL.y + 1, currentStateR % 2)) {
-//				shotedL = 0;
-//			} else {
-//				shot(playerL.x, playerL.y + 1, currentStateR % 2);
-//			}
-//		}
 //	}
+}
+
+void setScore(int score){
+	char buffer[50];
+	sprintf(buffer, "\nScore: %d", score);
+	HAL_UART_Transmit(&huart1, (uint8_t*)buffer, strlen(buffer), HAL_MAX_DELAY);
 }
 
 /* USER CODE END 0 */
@@ -923,6 +956,7 @@ int main(void) {
 	MX_USART1_UART_Init();
 	MX_RTC_Init();
 	MX_TIM1_Init();
+	MX_TIM2_Init();
 	/* USER CODE BEGIN 2 */
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_SET);
@@ -948,7 +982,8 @@ int main(void) {
 	mydate.Year = 02;
 	mydate.Month = 11;
 	mydate.Date = 17;
-
+	PWM_Start();
+	//playMelodyNonBlocking();
 	HAL_RTC_SetDate(&hrtc, &mydate, RTC_FORMAT_BIN);
 	char timeStr[20];
 	char dateStr[20];
@@ -964,6 +999,35 @@ int main(void) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
+		if (R_Health == 0) {
+			refreshAll();
+			HAL_UART_Transmit(&huart1, "Right WON!", 10,
+			HAL_MAX_DELAY);
+			setScore(playerL.score);
+			screen = -1;
+			for (int i = 0; i < 19; i++) {
+				setCursor(i, 1);
+				write(1);
+				HAL_Delay(400);
+			}
+		}
+
+		if (L_Health == 0) {
+			refreshAll();
+			HAL_UART_Transmit(&huart1, "LEFT WON!", 9,
+			HAL_MAX_DELAY);
+			setScore(playerR.score);
+			screen = -1;
+			for (int i = 0; i < 19; i++) {
+				setCursor(i, 1);
+				write(1);
+				HAL_Delay(400);
+			}
+		}
+		if(screen==-1){
+			setCursor(7, 1);
+			print("THE END");
+		}
 		if (screen == 2) {
 			HAL_RTC_GetTime(&hrtc, &mytime, RTC_FORMAT_BIN);
 			HAL_RTC_GetDate(&hrtc, &mydate, RTC_FORMAT_BIN);
@@ -1227,6 +1291,53 @@ static void MX_TIM1_Init(void) {
 	/* USER CODE BEGIN TIM1_Init 2 */
 
 	/* USER CODE END TIM1_Init 2 */
+
+}
+
+/**
+ * @brief TIM2 Initialization Function
+ * @param None
+ * @retval None
+ */
+static void MX_TIM2_Init(void) {
+
+	/* USER CODE BEGIN TIM2_Init 0 */
+
+	/* USER CODE END TIM2_Init 0 */
+
+	TIM_MasterConfigTypeDef sMasterConfig = { 0 };
+	TIM_OC_InitTypeDef sConfigOC = { 0 };
+
+	/* USER CODE BEGIN TIM2_Init 1 */
+
+	/* USER CODE END TIM2_Init 1 */
+	htim2.Instance = TIM2;
+	htim2.Init.Prescaler = 0;
+	htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim2.Init.Period = 4294967295;
+	htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+	if (HAL_TIM_PWM_Init(&htim2) != HAL_OK) {
+		Error_Handler();
+	}
+	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+	if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig)
+			!= HAL_OK) {
+		Error_Handler();
+	}
+	sConfigOC.OCMode = TIM_OCMODE_PWM1;
+	sConfigOC.Pulse = 0;
+	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+	if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_2)
+			!= HAL_OK) {
+		Error_Handler();
+	}
+	/* USER CODE BEGIN TIM2_Init 2 */
+
+	/* USER CODE END TIM2_Init 2 */
+	HAL_TIM_MspPostInit(&htim2);
 
 }
 

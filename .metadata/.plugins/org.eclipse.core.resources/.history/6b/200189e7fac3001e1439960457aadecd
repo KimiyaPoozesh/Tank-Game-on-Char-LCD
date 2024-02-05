@@ -1,0 +1,25 @@
+#include "main.h"
+
+#define G3  196
+#define GS3 208
+#define C4  262
+#define D4  294
+#define DS4 311
+
+
+uint16_t melody[] = {
+    G3, C4, DS4, G3, C4, DS4, G3, C4, DS4, G3, C4, DS4,
+    DS4, DS4, D4, D4, C4, C4, GS3, GS3, G3, G3, G3, G3
+};
+
+uint16_t durations[] = {
+    500, 500, 1000, 500, 500, 1000, 500, 500, 1000, 500, 500, 1000,
+    500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500
+};
+
+void playMelody() {
+    for (int i = 0; i < sizeof(melody) / sizeof(melody[0]); i++) {
+        PWM_Change_Tone(melody[i], 500);
+        HAL_Delay(durations[i]);
+    }
+}

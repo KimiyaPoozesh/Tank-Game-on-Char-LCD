@@ -1,0 +1,53 @@
+#include "main.h"
+
+#define G3  196
+#define GS3 208
+#define C4  262
+#define D4  294
+#define DS4 311
+
+#define SHOT_FREQ 2000  // Frequency for the shot sound
+#define SHOT_DURATION 100  // Duration for the shot sound
+
+
+uint16_t melody[] = {
+    G3, C4, DS4, G3, C4, DS4, G3, C4, DS4, G3, C4, DS4,
+    DS4, DS4, D4, D4, C4, C4, GS3, GS3, G3, G3, G3, G3
+};
+
+uint16_t durations[] = {
+    500, 500, 1000, 500, 500, 1000, 500, 500, 1000, 500, 500, 1000,
+    500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500
+};
+
+void playMelody() {
+    for (int i = 0; i < sizeof(melody) / sizeof(melody[0]); i++) {
+        PWM_Change_Tone(melody[i], 100);
+        HAL_Delay(durations[i]);
+    }
+}
+
+void GameOfThrones() {
+  for(int i=0; i<4; i++) {
+    PWM_Change_Tone(G3, 100);
+    HAL_Delay(500);
+    PWM_Change_Tone(0, 0);
+
+    PWM_Change_Tone(C4, 100);
+    HAL_Delay(500);
+    PWM_Change_Tone(0, 0);
+
+    PWM_Change_Tone(DS4, 100);
+    HAL_Delay(250);
+    PWM_Change_Tone(0, 0);
+
+    PWM_Change_Tone(D4, 100);
+    HAL_Delay(250);
+    PWM_Change_Tone(0, 0);
+  }
+}
+void playShotSound() {
+    PWM_Change_Tone(SHOT_FREQ, 100);  // Start the shot sound
+    HAL_Delay(SHOT_DURATION);  // Wait for the duration of the shot sound
+    PWM_Change_Tone(0, 0);  // Stop the sound
+}

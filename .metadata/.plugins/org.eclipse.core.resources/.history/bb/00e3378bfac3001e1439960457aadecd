@@ -1,0 +1,53 @@
+#include "main.h"
+
+
+#define G3  196
+#define GS3 208
+#define C4  262
+#define D4  294
+#define DS4 311
+
+
+void PWM_Start(pwm_timer,pwm_channel)
+{
+  HAL_TIM_PWM_Start(pwm_timer, pwm_channel);
+}
+
+void PWM_Change_Tone(uint16_t pwm_freq, uint16_t volume,pwm_timer,pwm_channel) // pwm_freq (1 - 20000), volume (0 - 1000)
+{
+  if (pwm_freq == 0 || pwm_freq > 20000)
+  {
+    __HAL_TIM_SET_COMPARE(pwm_timer, pwm_channel, 0);
+  }
+  else
+  {
+    const uint32_t internal_clock_freq = HAL_RCC_GetSysClockFreq();
+	const uint16_t prescaler = 1 + internal_clock_freq / pwm_freq / 60000;
+    const uint32_t timer_clock = internal_clock_freq / prescaler;
+    const uint32_t period_cycles = timer_clock / pwm_freq;
+    const uint32_t pulse_width = volume * period_cycles / 1000 / 2;
+
+    pwm_timer->Instance->PSC = prescaler - 1;
+    pwm_timer->Instance->ARR = period_cycles - 1;
+    pwm_timer->Instance->EGR = TIM_EGR_UG;
+    __HAL_TIM_SET_COMPARE(pwm_timer, pwm_channel, pulse_width); // pwm_timer->Instance->CCR2 = pulse_width;
+  }
+}
+
+
+uint16_t melody[] = {
+    G3, C4, DS4, G3, C4, DS4, G3, C4, DS4, G3, C4, DS4,
+    DS4, DS4, D4, D4, C4, C4, GS3, GS3, G3, G3, G3, G3
+};
+
+uint16_t durations[] = {
+    500, 500, 1000, 500, 500, 1000, 500, 500, 1000, 500, 500, 1000,
+    500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500
+};
+
+void playMelody(pwm_timer,pwm_channel) {
+    for (int i = 0; i < sizeof(melody) / sizeof(melody[0]); i++) {
+        PWM_Change_Tone(melody[i], VOLUME,pwm_timer,pwm_channel);
+        HAL_Delay(durations[i]);
+    }
+}
