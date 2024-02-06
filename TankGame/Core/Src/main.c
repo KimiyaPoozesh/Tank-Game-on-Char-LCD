@@ -74,6 +74,7 @@ int shotedL = 0;
 int shootFlag = 0;
 int vfx = 1; //1 if on 0 if off
 int win = 0;
+int spawner = 0;
 
 typedef unsigned char byte;
 byte bullet[8] = { 0x08, 0x1C, 0x0B, 0x07, 0x0E, 0x1C, 0x08, 0x00 };
@@ -215,6 +216,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		}
 		if (screen == 0) {
 			screen = 1;
+			HAL_TIM_Base_Start_IT(&htim1);
 			refreshAll();
 			initializeObjects();
 			displayObjects();
@@ -233,10 +235,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 		if (screen == 0) {
 			screen = 2;
-			setCursor(20, 0);
-			print("                    ");
-			setCursor(0, 1);
-			print("                      ");
+			refreshAll();
 			showAbout();
 		}
 		/* code */
@@ -246,10 +245,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		HAL_MAX_DELAY);
 		if (screen == 0) {
 			screen = 3;
-			setCursor(20, 0);
-			print("                    ");
-			setCursor(0, 1);
-			print("                      ");
+			refreshAll();
 			showSetting();
 		}
 		/* code */
@@ -886,40 +882,112 @@ void HealthSetting(void) {
 	print("#-Confirm");
 }
 
-TIM_HandleTypeDef *pwm_timer = &htim2; // Point to PWM timer configured in CubeMX
-uint32_t pwm_channel = TIM_CHANNEL_2;  // Specify configured PWM channel
+//TIM_HandleTypeDef *pwm_timer = &htim2; // Point to PWM timer configured in CubeMX
+//uint32_t pwm_channel = TIM_CHANNEL_2;  // Specify configured PWM channel
+//
+//void PWM_Start() {
+//	HAL_TIM_PWM_Start(pwm_timer, pwm_channel);
+//}
+//
+//void PWM_Change_Tone(uint16_t pwm_freq, uint16_t volume) // pwm_freq (1 - 20000), volume (0 - 1000)
+//{
+//	if (pwm_freq == 0 || pwm_freq > 20000) {
+//		__HAL_TIM_SET_COMPARE(pwm_timer, pwm_channel, 0);
+//	} else {
+//		const uint32_t internal_clock_freq = HAL_RCC_GetSysClockFreq();
+//		const uint16_t prescaler = 1 + internal_clock_freq / pwm_freq / 60000;
+//		const uint32_t timer_clock = internal_clock_freq / prescaler;
+//		const uint32_t period_cycles = timer_clock / pwm_freq;
+//		const uint32_t pulse_width = volume * period_cycles / 1000 / 2;
+//
+//		pwm_timer->Instance->PSC = prescaler - 1;
+//		pwm_timer->Instance->ARR = period_cycles - 1;
+//		pwm_timer->Instance->EGR = TIM_EGR_UG;
+//		__HAL_TIM_SET_COMPARE(pwm_timer, pwm_channel, pulse_width); // pwm_timer->Instance->CCR2 = pulse_width;
+//	}
+//}
 
-void PWM_Start() {
-	HAL_TIM_PWM_Start(pwm_timer, pwm_channel);
+void spawnRandomObject() {
+
+	int x, y;
+	do {
+		x = rand() % LCD_WIDTH;
+		y = rand() % LCD_HEIGHT;
+	} while (lcd[y][x] != ' ');
+
+	if (rand() % 2 == 0) {
+
+		lcd[y][x] = 1; //heart
+	} else {
+
+		lcd[y][x] = 5; //bullets
+	}
+	HAL_UART_Transmit(&huart1, lcd[y][x], 1,
+	HAL_MAX_DELAY);
+	setCursor(x, y);
+	write(lcd[y][x]);
 }
 
-void PWM_Change_Tone(uint16_t pwm_freq, uint16_t volume) // pwm_freq (1 - 20000), volume (0 - 1000)
-{
-	if (pwm_freq == 0 || pwm_freq > 20000) {
-		__HAL_TIM_SET_COMPARE(pwm_timer, pwm_channel, 0);
-	} else {
-		const uint32_t internal_clock_freq = HAL_RCC_GetSysClockFreq();
-		const uint16_t prescaler = 1 + internal_clock_freq / pwm_freq / 60000;
-		const uint32_t timer_clock = internal_clock_freq / prescaler;
-		const uint32_t period_cycles = timer_clock / pwm_freq;
-		const uint32_t pulse_width = volume * period_cycles / 1000 / 2;
+//CALL BACKS-----------------------------------------------------------------
 
-		pwm_timer->Instance->PSC = prescaler - 1;
-		pwm_timer->Instance->ARR = period_cycles - 1;
-		pwm_timer->Instance->EGR = TIM_EGR_UG;
-		__HAL_TIM_SET_COMPARE(pwm_timer, pwm_channel, pulse_width); // pwm_timer->Instance->CCR2 = pulse_width;
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+	if (htim->Instance == TIM1) {
+		if (screen == 1) {
+			spawner++;
+			if (spawner >= 30) {
+				spawnRandomObject();
+				spawner = 0;
+			}
+		}
 	}
 }
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-//	if (htim->Instance == TIM1) {
-//	}
-}
 
-void setScore(int score){
+//void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
+//  if (huart->Instance == USART3) {
+//    memset(inArray, '\0', sizeof(inArray));
+//  }
+//}
+//
+//void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+//  if (huart->Instance == USART3) {
+//    inArray[idx] = rx_byte;
+//    idx++;
+//    if (idx == 9) {
+//      idx = 0;
+//      parser();
+//      uarttime = 0;
+//      uartdate = 1;
+//    }
+//    HAL_UART_Receive_IT(&huart3, &rx_byte, 1);
+//  }
+//}
+
+//SETTERS -----------------------------------------------------------------
+
+void setScore(int score) {
 	char buffer[50];
 	sprintf(buffer, "\nScore: %d", score);
-	HAL_UART_Transmit(&huart1, (uint8_t*)buffer, strlen(buffer), HAL_MAX_DELAY);
+	HAL_UART_Transmit(&huart1, (uint8_t*) buffer, strlen(buffer),
+	HAL_MAX_DELAY);
 }
+//void setRtcTime() {
+//  mytime.Hours = (int) hour;
+//  mytime.Minutes = (int) minute;
+//  mytime.Seconds = (int) second;
+//
+//  if (HAL_RTC_SetTime(&hrtc, &mytime, RTC_FORMAT_BIN) != HAL_OK) {
+//    Error_Handler();
+//  }
+//
+//  mydate.Year = year;
+//  mydate.Month = month;
+//  mydate.Date = day;
+//
+//  if (HAL_RTC_SetDate(&hrtc, &mydate, RTC_FORMAT_BIN) != HAL_OK) {
+//    Error_Handler();
+//  }
+//}
+//
 
 /* USER CODE END 0 */
 
@@ -964,6 +1032,11 @@ int main(void) {
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
 	HAL_UART_Transmit(&huart1, "yo", 2,
 	HAL_MAX_DELAY);
+	HAL_UART_Transmit(&huart1, "\n", 2,
+		HAL_MAX_DELAY);
+	HAL_UART_Transmit(&huart1, "mo.", 3,
+		HAL_MAX_DELAY);
+
 	srand(time(NULL));  // Initialize the random number generator
 
 	LiquidCrystal(GPIOD, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11,
@@ -985,6 +1058,7 @@ int main(void) {
 	PWM_Start();
 	//playMelodyNonBlocking();
 	HAL_RTC_SetDate(&hrtc, &mydate, RTC_FORMAT_BIN);
+	//HAL_UART_Receive_IT(&huart3, &rx_byte, 1);
 	char timeStr[20];
 	char dateStr[20];
 	showMain();
@@ -993,6 +1067,13 @@ int main(void) {
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
+		if (screen == 1) {
+			call_change_melody();
+		}
+		if (screen != 1) {
+			PWM_Stop();
+		}
+
 		if (shootFlag == 1) {
 			shotPosition();
 		}
@@ -1024,11 +1105,15 @@ int main(void) {
 				HAL_Delay(400);
 			}
 		}
-		if(screen==-1){
+		if (screen == -1) {
 			setCursor(7, 1);
 			print("THE END");
 		}
 		if (screen == 2) {
+//			if (timeFlag) {
+//				setRtcTime();
+//				timeFlag = 0;
+//			}
 			HAL_RTC_GetTime(&hrtc, &mytime, RTC_FORMAT_BIN);
 			HAL_RTC_GetDate(&hrtc, &mydate, RTC_FORMAT_BIN);
 			setCursor(20, 0);
@@ -1049,7 +1134,7 @@ int main(void) {
 			if (vfx) {
 				print("vfx on-# to turn off");
 			} else {
-				print("vfx off-# to turn on");
+				print("vfx off-# to turn on ");
 			}
 		}
 
@@ -1268,9 +1353,9 @@ static void MX_TIM1_Init(void) {
 
 	/* USER CODE END TIM1_Init 1 */
 	htim1.Instance = TIM1;
-	htim1.Init.Prescaler = 47;
+	htim1.Init.Prescaler = 4800 - 1;
 	htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-	htim1.Init.Period = 9999;
+	htim1.Init.Period = 10000 - 1;
 	htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	htim1.Init.RepetitionCounter = 0;
 	htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;

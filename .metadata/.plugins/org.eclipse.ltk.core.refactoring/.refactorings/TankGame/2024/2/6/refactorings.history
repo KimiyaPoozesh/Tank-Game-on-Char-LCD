@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;TankGame/Core/Src/Buzzer.c&apos; to &apos;Buzzer_RTC.c&apos;" description="Rename resource &apos;Buzzer.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Src/Buzzer.c" name="Buzzer_RTC.c" stamp="1707132777884" updateReferences="true"/>
+</session>

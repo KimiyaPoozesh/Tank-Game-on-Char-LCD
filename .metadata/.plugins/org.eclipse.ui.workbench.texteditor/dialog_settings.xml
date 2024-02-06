@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="shotPosition"/>
+		<item key="selection" value="playerR"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="shotPosition"/>
-			<item value="lcd"/>
-			<item value="direction"/>
-			<item value="playerR.direction"/>
-			<item value="playerL.direction"/>
-			<item value="changeFoxStateR"/>
-			<item value="shoot"/>
-			<item value="fire"/>
-			<item value="bullets"/>
-			<item value="shot"/>
-			<item value="shotedR"/>
+			<item value="playerR"/>
+			<item value="shoot(&amp;playerR)"/>
+			<item value="init"/>
+			<item value="write"/>
+			<item value="write(lcd[y][x])"/>
+			<item value="screen = 1"/>
+			<item value="screen"/>
+			<item value="screan=1;"/>
+			<item value="screan=1"/>
+			<item value="screen=1"/>
 			<item value="HAL_UART_Transmit"/>
-			<item value="shotedB"/>
-			<item value="createchar"/>
-			<item value="heart"/>
+			<item value="LCD_WIDTH"/>
+			<item value="lcd"/>
+			<item value="shoot"/>
+			<item value="vfx"/>
 		</list>
 		<list key="replacehistory">
 		</list>

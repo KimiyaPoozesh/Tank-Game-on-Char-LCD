@@ -1,4 +1,0 @@
-../Core/Src/Buzzer.c:27:6:playTankHitSound	8	static
-../Core/Src/Buzzer.c:37:6:playMelody	16	static
-../Core/Src/Buzzer.c:47:6:playMelodyNonBlocking	16	static
-../Core/Src/Buzzer.c:75:6:playExplosionSound	16	static
