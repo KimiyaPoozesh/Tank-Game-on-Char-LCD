@@ -1,6 +1,5 @@
 # Tank Game for STM32F3Discovery
 
-![Tank Game](link_to_game_screenshot.png)
 
 ## Overview
 
@@ -14,7 +13,6 @@ This is a tank game developed in C for the STM32F3Discovery board using Cube IDE
 - Menu system
 - Python code to save game data to a file on the system
 
-## Getting Started
 
 ### Prerequisites
 
@@ -22,3 +20,5 @@ This is a tank game developed in C for the STM32F3Discovery board using Cube IDE
 - Cube IDE
 - 4x20 LCD display
 - Numpad
+- Buzzer (for VFX)
+  
